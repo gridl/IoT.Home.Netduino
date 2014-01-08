@@ -97,12 +97,12 @@ namespace HomeStation.InfraRed.Encoder
                 notcommand >>= 1;
             }
 
-            //send
-            this.Transmitter
-                .Send(this);
-
             //place the "END" pattern
             this.MarkEnd();
+
+            //send
+            this.Transmitter.Send(this);
+
         }
 
         /// <summary>
@@ -111,8 +111,8 @@ namespace HomeStation.InfraRed.Encoder
         private void MarkStart()
         {
             //"START": 336 pulses + 168 blanks = 504 as total
-            this.TotalPulseCount = (16 + 8) * PulseBurstCount;
-            this.InitialPulseCount = 16 * PulseBurstCount;
+            this.TotalPulseCount = 540; // (16 + 8) * PulseBurstCount;
+            this.InitialPulseCount = 360; // 16 * PulseBurstCount;
             this.FinalPulseCount = 0;
 
             //append the defined pattern to the stream

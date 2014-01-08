@@ -116,8 +116,8 @@ namespace Home
                 //codec.Send(x[i++], 0x00);
                 Debug.Print("... cmd " + i);
                 codec.Send(0x00, i++);
-                i = i % 32;
-                Thread.Sleep(2000);
+                i = i % 16;
+                Thread.Sleep(3000);
             }
 
         }

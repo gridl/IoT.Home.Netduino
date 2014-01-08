@@ -62,8 +62,8 @@ namespace Home
             
             // LOOP INFINITO
             // -------------
-            while (true)
-            {
+            //while (true)
+            //{
                 //if (RHT03.Read())
                 //{
                 //    var temperatureCelsius = RHT03.Temperature;
@@ -72,7 +72,7 @@ namespace Home
                 //}
 
                 //    Thread.Sleep(2000);
-            }
+            //}
 
             //var RHT03 = new TemperatureSensor(Cpu.AnalogChannel.ANALOG_0);
             //var temp = RHT03.Temperature;
@@ -116,7 +116,7 @@ namespace Home
                 //codec.Send(x[i++], 0x00);
                 Debug.Print("... cmd " + i);
                 codec.Send(0x00, i++);
-                i = i % 256;
+                i = i % 32;
                 Thread.Sleep(2000);
             }
 

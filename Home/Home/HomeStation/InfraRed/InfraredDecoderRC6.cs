@@ -12,7 +12,7 @@ namespace HomeStation.InfraRed
     /// RC6 remote decoder. Tested only on RC6 modes 0 and 6 (microsoft special 4 byte mode). Fully static, no need to
     /// instantiate the class. NOT optimised - intentionall to make it easier to read and understand.
     /// </summary>
-    class RC6_Decoder
+    class InfraredDecoderRC6
     {
         /// <summary>
         /// This is the RC pin. It MUST be initialised to a valid InterruptPort in your main program or you will get an
@@ -58,7 +58,7 @@ namespace HomeStation.InfraRed
             intervals[pos] = DateTime.Now.Ticks / 10;
             signalStates[pos] = RemoteInputPin.Read();
             RCtimeoutTimer.Change(Timeout.Infinite, Timeout.Infinite);  // Stop the timer
-            RC6_Decoder.Decode(intervals, signalStates);
+            InfraredDecoderRC6.Decode(intervals, signalStates);
             pos = 0;
             intervals = new long[256];              // The garbage collector is going to need to run for this at some point!
             signalStates = new Boolean[256];        // But when? Probably in the middle of an interrupt. This bad code! :^)

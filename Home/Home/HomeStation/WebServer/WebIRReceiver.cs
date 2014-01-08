@@ -27,7 +27,7 @@ using SecretLabs.NETMF.Hardware.NetduinoPlus;
  * limitations under the License.
  */
 
-namespace HomeStation.InfraRed
+namespace HomeStation.WebServer
 {
     public class IrRx
     {

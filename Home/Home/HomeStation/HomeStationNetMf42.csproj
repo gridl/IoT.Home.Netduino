@@ -33,9 +33,15 @@
   </PropertyGroup>
   <Import Project="$(NetMfTargetsBaseDir)$(TargetFrameworkVersion)\CSharp.Targets" />
   <ItemGroup>
-    <Compile Include="InfraRed\NECDecoder.cs" />
-    <Compile Include="InfraRed\RC6_Decoder.cs" />
-    <Compile Include="InfraRed\WebIRReceiver.cs" />
+    <Compile Include="InfraRed\InfraredEncoderBase.cs" />
+    <Compile Include="InfraRed\InfraredEncoderNec.cs" />
+    <Compile Include="InfraRed\InfraredEncoderRC5.cs" />
+    <Compile Include="InfraRed\InfraredEncoderSamsung.cs" />
+    <Compile Include="InfraRed\InfraredEncoderSonySIRC.cs" />
+    <Compile Include="InfraRed\InfraredTransmitter.cs" />
+    <Compile Include="InfraRed\InfraredDecoderNec.cs" />
+    <Compile Include="InfraRed\InfraredDecoderRC6.cs" />
+    <Compile Include="WebServer\WebIRReceiver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="TempHumid\DHTSensor.cs" />

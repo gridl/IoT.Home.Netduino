@@ -6,9 +6,12 @@ using Microsoft.SPOT;
 using Microsoft.SPOT.Hardware;
 using SecretLabs.NETMF.Hardware;
 using SecretLabs.NETMF.Hardware.Netduino;
-using CW.NETMF;
 
-namespace NetduinoPlus2RHT03
+using HomeStation.WebServer;
+using HomeStation.InfraRed;
+using HomeStation.TempHumid;
+
+namespace CW.NETMF.Sensors
 {
     public class Program
     {

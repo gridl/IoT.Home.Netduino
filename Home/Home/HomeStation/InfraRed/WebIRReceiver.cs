@@ -7,7 +7,6 @@ using System.Threading;
 using Microsoft.SPOT.Net.NetworkInformation;
 using Microsoft.SPOT;
 
-
 using Microsoft.SPOT.Hardware;
 using SecretLabs.NETMF.Hardware;
 using SecretLabs.NETMF.Hardware.NetduinoPlus;
@@ -28,7 +27,7 @@ using SecretLabs.NETMF.Hardware.NetduinoPlus;
  * limitations under the License.
  */
 
-namespace NetduinoPlus2IR
+namespace HomeStation.InfraRed
 {
     public class IrRx
     {

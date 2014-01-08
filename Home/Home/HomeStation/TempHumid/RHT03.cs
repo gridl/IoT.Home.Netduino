@@ -4,7 +4,7 @@ using Microsoft.SPOT.Hardware;
 using CW.NETMF;
 using CW.NETMF.Sensors;
 
-namespace NetduinoPlus2RHT03
+namespace HomeStation.TempHumid
 {
     /// <summary>
     /// Represents an instance of the DHT22 sensor.

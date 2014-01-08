@@ -3,7 +3,7 @@ using Microsoft.SPOT;
 using Microsoft.SPOT.Hardware;
 using System.Threading;
 
-namespace NetduinoPlus2RHT03
+namespace HomeStation.InfraRed
 {
     // event handler delegate
     public delegate void IRCommandEventHandler(uint command);

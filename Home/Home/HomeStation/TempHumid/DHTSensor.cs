@@ -17,7 +17,7 @@
 //
 //</copyright>
 //---------------------------------------------------------------------------
-namespace CW.NETMF.Sensors
+namespace HomeStation.TempHumid
 {
     using System;
     using System.Runtime.CompilerServices;

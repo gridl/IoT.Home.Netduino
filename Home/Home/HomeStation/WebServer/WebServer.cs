@@ -23,7 +23,7 @@ using Microsoft.SPOT;
  * limitations under the License.
  */
 
-namespace NetduinoPlus2RHT03
+namespace HomeStation.WebServer
 {
     public class WebServer
     {

@@ -2,7 +2,7 @@
 using System.Threading;
 using Microsoft.SPOT.Hardware;
 
-namespace NetduinoPlus2RHT03
+namespace HomeStation.TempHumid
 {
     public class TemperatureSensor
     {

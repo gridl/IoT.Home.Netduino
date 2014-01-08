@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.SPOT;
 
-namespace NetduinoPlus2RHT03
+namespace HomeStation.TempHumid
 {
     public class TimeCounter
     {

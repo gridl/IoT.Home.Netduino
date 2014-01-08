@@ -19,7 +19,7 @@ using Microsoft.SPOT.Hardware;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-namespace IRTransmitter
+namespace HomeStation.InfraRed.Encoder
 {
     public class InfraredCodecBase
     {

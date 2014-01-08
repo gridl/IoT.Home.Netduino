@@ -3,7 +3,7 @@ using Microsoft.SPOT;
 using Microsoft.SPOT.Hardware;
 using System.Threading;
 
-namespace HomeStation.InfraRed
+namespace HomeStation.InfraRed.Decoder
 {
     // event handler delegate
     public delegate void IRCommandEventHandler(uint command);

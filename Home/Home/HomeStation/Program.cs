@@ -7,9 +7,10 @@ using Microsoft.SPOT.Hardware;
 using SecretLabs.NETMF.Hardware;
 using SecretLabs.NETMF.Hardware.Netduino;
 
-using HomeStation.WebServer;
-using HomeStation.InfraRed;
+using HomeStation.InfraRed.Encoder;
+using HomeStation.InfraRed.Decoder;
 using HomeStation.TempHumid;
+using HomeStation.WebServer;
 
 namespace Home
 {
@@ -75,6 +76,50 @@ namespace Home
 
             //var RHT03 = new TemperatureSensor(Cpu.AnalogChannel.ANALOG_0);
             //var temp = RHT03.Temperature;
+
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            //create the infrared transmitter driver
+            var irtx = new InfraredTransmitter(Pins.GPIO_PIN_D8);
+
+            //create the codec to be used
+            var codec = new InfraredCodecNEC(irtx);
+            //codec.ExtendedMode = true;
+
+            //define button for sending IR command
+            var btn_dir = new InterruptPort(
+                Pins.GPIO_PIN_D2,
+                true,
+                Port.ResistorMode.PullUp,
+                Port.InterruptMode.InterruptEdgeLow
+                );
+
+            btn_dir.OnInterrupt += (a_, b_, dt_) =>
+            {
+                Debug.Print("sending ...");
+                codec.Send(0xFF, 0xE0);
+            };
+
+            //Thread.Sleep(Timeout.Infinite);
+
+            // send non-stop sequence
+
+            int i = 0;
+            //int[] x = {0xE0, 0xEA, 0x0E, 0x15};
+            //int[] x = { 0xFF, 0xFF, 0xFF, 0xFF };
+            //int[] x = { 0x0D, 0x1F, 0x0D, 0x1F };
+            int[] x = { 0xF2, 0xE3, 0xEA, 0xE0 }; // on, yellow, white, off
+
+            while (true)
+            {
+                //codec.Send(0x00, x[i++]);
+                //codec.Send(x[i++], 0x00);
+                Debug.Print("... cmd " + i);
+                codec.Send(0x00, i++);
+                i = i % 256;
+                Thread.Sleep(2000);
+            }
+
         }
 
         static void necRemoteControlDecoder_OnIrCommandReceived(UInt32 irData)

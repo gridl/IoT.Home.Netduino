@@ -16,7 +16,7 @@ using Microsoft.SPOT;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-namespace IRTransmitter
+namespace HomeStation.InfraRed.Encoder
 {
     /// <summary>
     /// Class acting as driver for the Samsung IR protocol

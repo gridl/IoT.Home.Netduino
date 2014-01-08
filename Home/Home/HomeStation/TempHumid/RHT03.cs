@@ -1,8 +1,6 @@
 using System;
 using Microsoft.SPOT;
 using Microsoft.SPOT.Hardware;
-using CW.NETMF;
-using CW.NETMF.Sensors;
 
 namespace HomeStation.TempHumid
 {

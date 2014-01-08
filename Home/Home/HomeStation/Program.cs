@@ -11,7 +11,7 @@ using HomeStation.WebServer;
 using HomeStation.InfraRed;
 using HomeStation.TempHumid;
 
-namespace CW.NETMF.Sensors
+namespace Home
 {
     public class Program
     {

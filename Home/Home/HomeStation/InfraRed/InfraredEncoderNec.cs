@@ -111,6 +111,7 @@ namespace HomeStation.InfraRed.Encoder
         private void MarkStart()
         {
             //"START": 336 pulses + 168 blanks = 504 as total
+            // parâmetros ajustados com ajuda do oscilosópio para 9 ms e 4.5 ms
             this.TotalPulseCount = 540; // (16 + 8) * PulseBurstCount;
             this.InitialPulseCount = 360; // 16 * PulseBurstCount;
             this.FinalPulseCount = 0;

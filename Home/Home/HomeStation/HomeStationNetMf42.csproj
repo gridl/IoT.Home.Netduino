@@ -41,6 +41,7 @@
     <Compile Include="InfraRed\InfraredTransmitter.cs" />
     <Compile Include="InfraRed\InfraredDecoderNec.cs" />
     <Compile Include="InfraRed\InfraredDecoderRC6.cs" />
+    <Compile Include="TempHumid\DHTSensorScan.cs" />
     <Compile Include="WebServer\WebIRReceiver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />

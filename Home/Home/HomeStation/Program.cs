@@ -24,6 +24,8 @@ namespace Home
             // HUMIDITY & TEMPERATURE
             // ----------------------
             var RHT03 = new Dht22Sensor(Pins.GPIO_PIN_D0, Pins.GPIO_PIN_D1, PullUpResistor.Internal);
+            DHTSensorScan _DHTSensorScan = new DHTSensorScan(RHT03);
+
             Thread.Sleep(2000);
 
             WebServer w = new WebServer(80, 10000);
@@ -32,10 +34,10 @@ namespace Home
             w.CommandReceived += delegate(object o, WebServer.WebServerEventArgs e)
             {
                 //WebServer.OutPutStream(e.response, e.rawURL);
-                if (RHT03.Read())
+                //if (RHT03.Read())
                 {
-                    var temperatureCelsius = RHT03.Temperature;
-                    var humidity = RHT03.Humidity;
+                    var temperatureCelsius = _DHTSensorScan.Temperature;
+                    var humidity = _DHTSensorScan.Humidity;
                     string answer = "DHT Sensor: RH = " + humidity.ToString("F1") + "%  Temp = " + temperatureCelsius.ToString("F1") + "°C ";
                     Debug.Print(answer);
                     WebServer.OutPutStream(e.response, answer);
@@ -100,26 +102,28 @@ namespace Home
                 codec.Send(0xFF, 0xE0);
             };
 
+            // loop forever reading Humidity & Temperature
+            _DHTSensorScan.GatherInput();
+
             //Thread.Sleep(Timeout.Infinite);
 
             // send non-stop sequence
 
-            int i = 0;
-            //int[] x = {0xE0, 0xEA, 0x0E, 0x15};
-            //int[] x = { 0xFF, 0xFF, 0xFF, 0xFF };
-            //int[] x = { 0x0D, 0x1F, 0x0D, 0x1F };
-            int[] x = { 0xF2, 0xE3, 0xEA, 0xE0 }; // on, yellow, white, off
+            //int i = 0;
+            ////int[] x = {0xE0, 0xEA, 0x0E, 0x15};
+            ////int[] x = { 0xFF, 0xFF, 0xFF, 0xFF };
+            ////int[] x = { 0x0D, 0x1F, 0x0D, 0x1F };
+            //int[] x = { 0xF2, 0xE3, 0xEA, 0xE0 }; // on, yellow, white, off
 
-            while (true)
-            {
-                //codec.Send(0x00, x[i++]);
-                //codec.Send(x[i++], 0x00);
-                Debug.Print("... cmd " + i);
-                codec.Send(0x00, i++);
-                i = i % 16;
-                Thread.Sleep(3000);
-            }
-
+            //while (true)
+            //{
+            //    //codec.Send(0x00, x[i++]);
+            //    //codec.Send(x[i++], 0x00);
+            //    Debug.Print("... cmd " + i);
+            //    codec.Send(0x00, i++);
+            //    i = i % 16;
+            //    Thread.Sleep(3000);
+            //}
         }
 
         static void necRemoteControlDecoder_OnIrCommandReceived(UInt32 irData)

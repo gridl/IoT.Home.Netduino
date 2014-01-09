@@ -93,7 +93,7 @@ namespace HomeStation.InfraRed.Decoder
 
         private static bool IsPulseMatch(long actualValue, long expectedValue)
         {
-            var marginOfError = 200;
+            var marginOfError = 300;
             if ((expectedValue - marginOfError) < actualValue && (expectedValue + marginOfError) > actualValue)
                 return true;
             return false;

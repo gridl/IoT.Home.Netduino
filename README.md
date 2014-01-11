@@ -16,7 +16,7 @@ git add .
 git commit -am "my changes"  
 
 git fetch origin  
-git rebase origin/master
+git rebase origin/master  
 git rebase origin/my-new-feature   
 
 git push origin my-new-feature  

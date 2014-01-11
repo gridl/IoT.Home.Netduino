@@ -47,7 +47,7 @@ namespace HomeStation.TempHumid
                     elapsed += timeCounter.Elapsed;
                     elapsed1 += timeCounter.Elapsed;
 
-                    if (elapsed.Milliseconds >= 200)
+                    if (elapsed.Milliseconds >= 500)
                     {
                         if (_sensor.Read())
                         {
@@ -63,7 +63,7 @@ namespace HomeStation.TempHumid
                         elapsed = TimeSpan.Zero;
                     }
 
-                    if (elapsed1.Seconds >= 1)
+                    if (elapsed1.Seconds >= 2)
                     {
                         Double tmp = 0.0f;
                         for (Byte i = 0; i < temp_history.Length; i++) tmp += temp_history[i];

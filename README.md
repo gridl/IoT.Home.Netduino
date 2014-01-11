@@ -31,6 +31,5 @@ git tag 1.0.0-RC1
 
 
 optional:  
-feel free to rebase within your feature branch at will. ok to rebase after pushing if your team can handle it!
-
+feel free to rebase within your feature branch at will. ok to rebase after pushing if your team can handle it!  
 git rebase -i origin/master   

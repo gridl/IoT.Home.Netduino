@@ -16,20 +16,24 @@ namespace Home
 {
     public class Program
     {
-        //public static InterruptPort RC_In = new InterruptPort(Pins.GPIO_PIN_D7, false, Port.ResistorMode.Disabled, Port.InterruptMode.InterruptEdgeBoth);
-        public static InterruptPort RC_In = new InterruptPort(Pins.GPIO_PIN_D7, false, Port.ResistorMode.Disabled, Port.InterruptMode.InterruptEdgeBoth);
-
         public static void Main()
         {
-            // HUMIDITY & TEMPERATURE
-            // ----------------------
+            // Humidity and Temperature
             var RHT03 = new Dht22Sensor(Pins.GPIO_PIN_D0, Pins.GPIO_PIN_D1, PullUpResistor.Internal);
             DHTSensorScan _DHTSensorScan = new DHTSensorScan(RHT03);
 
-            Thread.Sleep(2000);
+            //IRRX: Infrared Decoder
+            NecProtocolDecoder decoder = new NecProtocolDecoder(Pins.GPIO_PIN_D7);
+            NecProtocolDecoder.OnIRCommandReceived += NecDecoder_OnIRCommandReceived;
 
+            //IRTX: Infrared Encoder
+            var irtx = new InfraredTransmitter(Pins.GPIO_PIN_D8);
+            var codec = new InfraredCodecNEC(irtx);
+
+            Thread.Sleep(1000);
+
+            // Web Server
             WebServer w = new WebServer(80, 10000);
-
             w.Start();
             w.CommandReceived += delegate(object o, WebServer.WebServerEventArgs e)
             {
@@ -41,109 +45,20 @@ namespace Home
                     string answer = "DHT Sensor: RH = " + humidity.ToString("F1") + "%  Temp = " + temperatureCelsius.ToString("F1") + "°C ";
                     Debug.Print(answer);
                     WebServer.OutPutStream(e.response, answer);
+
+                    codec.Send(0xFF, 0x0D); // leds on
+                    Thread.Sleep(1000);
+                    codec.Send(0xFF, 0x1F); // leds off
                 }
             };
 
-            
-            // INFRA RED
-            // ---------
-            //// Declare our remote control input pin
-            RC_In.OnInterrupt += new NativeEventHandler(RC_In_OnInterrupt);
-
-            //// Set the RC6 decoder's input pin to the one we just declared, and create an event handler for the code.
-            //RC6_Decoder.RemoteInputPin = RC_In;
-            //RC6_Decoder.CodeReceived += new CodeReceivedEventHandler(RC6_Decoder_CodeReceived);
-
-            // NEC 
-
-            //var necRemoteControlDecoder = new NecProtocolDecoder(Pins.GPIO_PIN_D7);
-
-            NecProtocolDecoder.RemoteInputPin = RC_In;
-            NecProtocolDecoder.OnIRCommandReceived += necRemoteControlDecoder_OnIrCommandReceived;
-
-            
-            // LOOP INFINITO
-            // -------------
-            //while (true)
-            //{
-                //if (RHT03.Read())
-                //{
-                //    var temperatureCelsius = RHT03.Temperature;
-                //    var humidity = RHT03.Humidity;
-                //    Debug.Print("DHT sensor Read() ok, RH = " + humidity.ToString("F1") + "%, Temp = " + temperatureCelsius.ToString("F1") + "°C " + (temperatureCelsius * 1.8 + 32).ToString("F1") + "°F");
-                //}
-
-                //    Thread.Sleep(2000);
-            //}
-
-            //var RHT03 = new TemperatureSensor(Cpu.AnalogChannel.ANALOG_0);
-            //var temp = RHT03.Temperature;
-
-            ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-            //create the infrared transmitter driver
-            var irtx = new InfraredTransmitter(Pins.GPIO_PIN_D8);
-
-            //create the codec to be used
-            var codec = new InfraredCodecNEC(irtx);
-            //codec.ExtendedMode = true;
-
-            //define button for sending IR command
-            var btn_dir = new InterruptPort(
-                Pins.GPIO_PIN_D2,
-                true,
-                Port.ResistorMode.PullUp,
-                Port.InterruptMode.InterruptEdgeLow
-                );
-
-            btn_dir.OnInterrupt += (a_, b_, dt_) =>
-            {
-                Debug.Print("sending ...");
-                codec.Send(0xFF, 0xE0);
-            };
-
-            // loop forever reading Humidity & Temperature
+            // Loop forever reading Humidity & Temperature
             _DHTSensorScan.GatherInput();
-
-            //Thread.Sleep(Timeout.Infinite);
-
-            // send non-stop sequence
-
-            //int i = 0;
-            ////int[] x = {0xE0, 0xEA, 0x0E, 0x15};
-            ////int[] x = { 0xFF, 0xFF, 0xFF, 0xFF };
-            ////int[] x = { 0x0D, 0x1F, 0x0D, 0x1F };
-            //int[] x = { 0xF2, 0xE3, 0xEA, 0xE0 }; // on, yellow, white, off
-
-            //while (true)
-            //{
-            //    //codec.Send(0x00, x[i++]);
-            //    //codec.Send(x[i++], 0x00);
-            //    Debug.Print("... cmd " + i);
-            //    codec.Send(0x00, i++);
-            //    i = i % 16;
-            //    Thread.Sleep(3000);
-            //}
         }
 
-        static void necRemoteControlDecoder_OnIrCommandReceived(UInt32 irData)
+        static void NecDecoder_OnIRCommandReceived(UInt32 irData)
         {
-            Debug.Print("Ir Command Received: " + UlongToHexString((ulong) irData));
-        }
-
-
-        // Event handler for the RC6 pin's code event. Just pass everything to the handler in the RC6 decoder class
-        static void RC_In_OnInterrupt(uint data1, uint data2, DateTime time)
-        {
-            //RC6_Decoder.Record_Pulse(data1, data2, time);
-
-            NecProtocolDecoder.OnInterrupt(data1, data2, time);
-        }
-
-        // Event handler for the code received event
-        static void RC6_Decoder_CodeReceived(int mode, ulong data)
-        {
-            Debug.Print("Received code! Mode=" + mode.ToString() + " ... Code=0x" + UlongToHexString(data));
+            Debug.Print("Ir Command Received: " + UlongToHexString((ulong)irData));
         }
 
         // Hex to string. Codes make more sense in hex as they are really four bytes

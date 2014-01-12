@@ -20,12 +20,12 @@ namespace HomeStation.InfraRed.Decoder
         private static int _currentIndex = 0;
         private static Timer _timeout = new Timer(new TimerCallback(PulseTimedOut), null, Timeout.Infinite, Timeout.Infinite);
 
-        public NecProtocolDecoder()
+        public NecProtocolDecoder(Cpu.Pin irReceiverPin)
         {
             //_timeout = new timer(new timercallback(pulsetimedout), null, timeout.infinite, timeout.infinite);
 
-            //remoteinputpin = new interruptport(irreceiverpin, false, port.resistormode.disabled, port.interruptmode.interruptedgeboth);
-            //remoteinputpin.oninterrupt += new nativeeventhandler(oninterrupt);
+            RemoteInputPin = new InterruptPort(irReceiverPin, false, Port.ResistorMode.Disabled, Port.InterruptMode.InterruptEdgeBoth);
+            RemoteInputPin.OnInterrupt += new NativeEventHandler(OnInterrupt);
 
             _currentIndex = 0;
         }
@@ -56,8 +56,6 @@ namespace HomeStation.InfraRed.Decoder
 
             ConvertPulsesToMicroseconds(numberOfPulses);
 
-            //if (numberOfPulses != 68) return;
-            //if (!IsPulseMatch(_pulses[0], 9000) || !IsPulseMatch(_pulses[1], 4500))
             if (!IsPulseMatch(_pulses[0], 9000) || !IsPulseMatch(_pulses[1], 4500))
             {
                 Debug.Print("Did not find the correct burst & space.");

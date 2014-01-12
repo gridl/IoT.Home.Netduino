@@ -29,11 +29,12 @@ namespace HomeStation.TempHumid
         {
             _sensor = sensor;
             
+            //Create scan task uncommenting lines below
+            //Otherwise leave commnents and run GatherInput loop after init
+
             //gather_input = new Thread(GatherInput);
             //gather_input.Priority = ThreadPriority.Lowest;
-
             //Thread.Sleep(2000);
-
             //gather_input.Start();
         }
 

@@ -68,4 +68,7 @@
   <ItemGroup>
     <Folder Include="Tools\" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="InfraRed\LutronMaestroLightDimmer.txt" />
+  </ItemGroup>
 </Project>

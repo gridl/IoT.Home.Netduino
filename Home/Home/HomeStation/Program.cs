@@ -46,6 +46,8 @@ namespace Home
                     Debug.Print(answer);
                     WebServer.OutPutStream(e.response, answer);
 
+                    string s = e.rawURL;
+
                     codec.Send(0xFF, 0x0D); // leds on
                     Thread.Sleep(1000);
                     codec.Send(0xFF, 0x1F); // leds off

@@ -33,7 +33,7 @@ namespace HomeStation.TempHumid
         {
             get
             {
-                return 18; // At least 1 ms
+                return 2; // At least 1 ms
             }
         }
 

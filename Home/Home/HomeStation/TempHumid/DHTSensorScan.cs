@@ -28,6 +28,11 @@ namespace HomeStation.TempHumid
         public DHTSensorScan(DhtSensor sensor)
         {
             _sensor = sensor;
+            if (_sensor.Read())
+            {
+                for (int i = 0; i < temp_history.Length; i++) temp_history[i] = _sensor.Temperature;
+                for (int i = 0; i < humid_history.Length; i++) humid_history[i] = _sensor.Humidity;
+            }
             
             //Create scan task uncommenting lines below
             //Otherwise leave commnents and run GatherInput loop after init
@@ -48,7 +53,7 @@ namespace HomeStation.TempHumid
                     elapsed += timeCounter.Elapsed;
                     elapsed1 += timeCounter.Elapsed;
 
-                    if (elapsed.Milliseconds >= 500)
+                    if (elapsed.Milliseconds >= 1000)
                     {
                         if (_sensor.Read())
                         {

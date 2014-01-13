@@ -3,6 +3,9 @@ using System.Threading;
 using Microsoft.SPOT.Hardware;
 using Microsoft.SPOT;
 
+using SecretLabs.NETMF.Hardware; 
+using SecretLabs.NETMF.Hardware.Netduino; 
+
 
 namespace HomeStation.TempHumid
 {
@@ -24,6 +27,7 @@ namespace HomeStation.TempHumid
         Int32 history_index = 0;
 
         DhtSensor _sensor;
+        OutputPort onBoardLed = new OutputPort(Pins.ONBOARD_LED, false);
 
         public DHTSensorScan(DhtSensor sensor)
         {
@@ -53,7 +57,7 @@ namespace HomeStation.TempHumid
                     elapsed += timeCounter.Elapsed;
                     elapsed1 += timeCounter.Elapsed;
 
-                    if (elapsed.Milliseconds >= 1000)
+                    if (elapsed.Seconds >= 1)
                     {
                         if (_sensor.Read())
                         {
@@ -67,6 +71,8 @@ namespace HomeStation.TempHumid
                             history_index = 0;
 
                         elapsed = TimeSpan.Zero;
+
+                        onBoardLed.Write((history_index & 0x01) == 0); // blink on board led
                     }
 
                     if (elapsed1.Seconds >= 2)
@@ -80,7 +86,7 @@ namespace HomeStation.TempHumid
                         humidity = (tmp / humid_history.Length);
 
                         elapsed1 = TimeSpan.Zero;
-
+                        
                         //string log = "DHT Sensor: RH = " + humidity.ToString("F1") +
                         //                    "%  Temp = " + temperature.ToString("F1") + "°C ";
                         //Debug.Print(log);                            

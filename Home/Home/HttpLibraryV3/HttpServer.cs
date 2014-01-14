@@ -15,7 +15,7 @@ namespace HttpLibrary
     /// </summary>
     /// <param name="Request"></param>
     /// <param name="Response"></param>
-    public delegate void OnRequestRecievedDelegate(HttpRequest Request, HttpResponse Response);
+    public delegate void OnRequestReceivedDelegate(HttpRequest Request, HttpResponse Response);
     /// <summary>
     /// Delegate for error event handling
     /// </summary>
@@ -32,7 +32,7 @@ namespace HttpLibrary
         private Socket accepted_socket;
         private bool is_server_running;
         private string storage_path;
-        private byte[] recieve_buffer;
+        private byte[] receive_buffer;
         private byte[] send_buffer;
         private bool is_polled;
         private int data_size;
@@ -49,15 +49,15 @@ namespace HttpLibrary
             if (is_polled)
             {
                 data_size = accepted_socket.Available;
-                recieve_buffer = new byte[data_size];
+                receive_buffer = new byte[data_size];
                 if (data_size > 0)
                 {
-                    accepted_socket.Receive(recieve_buffer, 0, recieve_buffer.Length, SocketFlags.None);
+                    accepted_socket.Receive(receive_buffer, 0, receive_buffer.Length, SocketFlags.None);
                     if (use_authentication)
                     {
-                        if (authenticate(recieve_buffer))
+                        if (authenticate(receive_buffer))
                         {
-                            OnRequestReceivedFunction(new HttpRequest(this.recieve_buffer, this.storage_path, this.accepted_socket),
+                            OnRequestReceivedFunction(new HttpRequest(this.receive_buffer, this.storage_path, this.accepted_socket),
                                 new HttpResponse(this.send_buffer, this.storage_path, this.accepted_socket));
                         }
                         else
@@ -69,11 +69,11 @@ namespace HttpLibrary
                     }
                     else
                     {
-                        OnRequestReceivedFunction(new HttpRequest(this.recieve_buffer, this.storage_path, this.accepted_socket),
+                        OnRequestReceivedFunction(new HttpRequest(this.receive_buffer, this.storage_path, this.accepted_socket),
                                 new HttpResponse(this.send_buffer, this.storage_path, this.accepted_socket));
                     }
                 }
-                recieve_buffer = null;
+                receive_buffer = null;
             }
         }
         private void run_server()
@@ -181,7 +181,7 @@ namespace HttpLibrary
         /// <summary>
         /// RequestRecieved event
         /// </summary>
-        public event OnRequestRecievedDelegate OnRequestReceived;
+        public event OnRequestReceivedDelegate OnRequestReceived;
 
         /// <summary>
         /// Class constructor
@@ -195,7 +195,7 @@ namespace HttpLibrary
             this.accepted_socket = null;
             this.is_server_running = false;
             this.storage_path = PagesDirectory;
-            this.recieve_buffer = null;
+            this.receive_buffer = null;
             this.send_buffer = new byte[256];
             is_polled = false;
             data_size = 0;
@@ -219,7 +219,7 @@ namespace HttpLibrary
             this.accepted_socket = null;
             this.is_server_running = false;
             this.storage_path = PagesDirectory;
-            this.recieve_buffer = null;
+            this.receive_buffer = null;
             this.send_buffer = new byte[256];
             is_polled = false;
             data_size = 0;

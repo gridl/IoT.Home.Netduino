@@ -44,7 +44,7 @@ namespace Home
             ServerCredential = new Credential("Jose Motta", "admin", "admin");
             Server = new HttpServer(ServerConfiguration, ServerCredential, @"\SD\");
             Server.OnServerError += new OnServerErrorDelegate(Server_OnServerError);
-            Server.OnRequestReceived += new OnRequestRecievedDelegate(Server_OnRequestReceived);
+            Server.OnRequestReceived += new OnRequestReceivedDelegate(Server_OnRequestReceived);
             Server.Start();
 
             //// Web Server

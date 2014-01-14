@@ -7,15 +7,22 @@ using Microsoft.SPOT.Hardware;
 using SecretLabs.NETMF.Hardware;
 using SecretLabs.NETMF.Hardware.Netduino;
 
+using System.IO;
+using HttpLibrary;
+
 using HomeStation.InfraRed.Encoder;
 using HomeStation.InfraRed.Decoder;
 using HomeStation.TempHumid;
-using HomeStation.WebServer;
+//using HomeStation.WebServer;
 
 namespace Home
 {
     public class Program
     {
+        static HttpServer Server;//server object
+        static Credential ServerCredential;//server security
+        static Configuration ServerConfiguration;//configuration settings
+
         public static void Main()
         {
             // Humidity and Temperature
@@ -33,29 +40,64 @@ namespace Home
             Thread.Sleep(1000);
 
             // Web Server
-            WebServer w = new WebServer(80, 10000);
-            w.Start();
-            w.CommandReceived += delegate(object o, WebServer.WebServerEventArgs e)
-            {
-                //WebServer.OutPutStream(e.response, e.rawURL);
-                //if (RHT03.Read())
-                {
-                    var temperatureCelsius = _DHTSensorScan.Temperature;
-                    var humidity = _DHTSensorScan.Humidity;
-                    string answer = "DHT Sensor: RH = " + humidity.ToString("F1") + "%  Temp = " + temperatureCelsius.ToString("F1") + "°C ";
-                    Debug.Print(answer);
-                    WebServer.OutPutStream(e.response, answer);
+            ServerConfiguration = new Configuration(80);
+            ServerCredential = new Credential("Jose Motta", "admin", "admin");
+            Server = new HttpServer(ServerConfiguration, ServerCredential, @"\SD\");
+            Server.OnServerError += new OnServerErrorDelegate(Server_OnServerError);
+            Server.OnRequestReceived += new OnRequestRecievedDelegate(Server_OnRequestReceived);
+            Server.Start();
 
-                    //string s = e.rawURL;
+            //// Web Server
+            //WebServer w = new WebServer(80, 10000);
+            //w.Start();
+            //w.CommandReceived += delegate(object o, WebServer.WebServerEventArgs e)
+            //{
+            //    //WebServer.OutPutStream(e.response, e.rawURL);
+            //    //if (RHT03.Read())
+            //    {
+            //        var temperatureCelsius = _DHTSensorScan.Temperature;
+            //        var humidity = _DHTSensorScan.Humidity;
+            //        string answer = "DHT Sensor: RH = " + humidity.ToString("F1") + "%  Temp = " + temperatureCelsius.ToString("F1") + "°C ";
+            //        Debug.Print(answer);
+            //        WebServer.OutPutStream(e.response, answer);
 
-                    //codec.Send(0xFF, 0x0D); // leds on
-                    //Thread.Sleep(1000);
-                    //codec.Send(0xFF, 0x1F); // leds off
-                }
-            };
+            //        //string s = e.rawURL;
+
+            //        //codec.Send(0xFF, 0x0D); // leds on
+            //        //Thread.Sleep(1000);
+            //        //codec.Send(0xFF, 0x1F); // leds off
+            //    }
+            //};
 
             // Loop forever reading Humidity & Temperature
             _DHTSensorScan.GatherInput();
+        }
+
+        static void Server_OnRequestReceived(HttpRequest Request, HttpResponse Response)
+        {
+            if (Request.RequestedFile != null)
+            {
+                string FullFileName = Request.FilesPath + Request.RequestedFile;
+                if (File.Exists(FullFileName))
+                {
+                    Response.WriteFile(FullFileName);
+                }
+                else
+                {
+                    Response.WriteNotFound();
+                }
+            }
+            else
+            {
+                Response.WriteFilesList();
+
+                //Response.WriteFile(Request.FilesPath + "home.html"); // TODO: produto
+            }
+        }
+
+        static void Server_OnServerError(ErrorEventArgs e)
+        {
+            Debug.Print(e.EventMessage);
         }
 
         static void NecDecoder_OnIRCommandReceived(UInt32 irData)
@@ -93,12 +135,5 @@ namespace Home
             }
             return s;
         }
-
-        //public static OutputPort outPort = new OutputPort(Pins.GPIO_PIN_D2, false);
-
-        //public void GetRequest(Socket socket, WebServer.WebServerEventArgs e)
-        //{
-        //    WebServer.OutPutStream(socket, e.rawURL);
-        //}
     }
 }

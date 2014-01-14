@@ -2,6 +2,11 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2012 for Windows Desktop
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeStationNetMf42", "HomeStation\HomeStationNetMf42.csproj", "{9B31E188-7210-411F-A201-BAA6F71D0A88}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A097923B-DB06-40C7-9785-25B6FA5F6B3D} = {A097923B-DB06-40C7-9785-25B6FA5F6B3D}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HttpLibraryV3", "HttpLibraryV3\HttpLibraryV3.csproj", "{A097923B-DB06-40C7-9785-25B6FA5F6B3D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +20,10 @@ Global
 		{9B31E188-7210-411F-A201-BAA6F71D0A88}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9B31E188-7210-411F-A201-BAA6F71D0A88}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9B31E188-7210-411F-A201-BAA6F71D0A88}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{A097923B-DB06-40C7-9785-25B6FA5F6B3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A097923B-DB06-40C7-9785-25B6FA5F6B3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A097923B-DB06-40C7-9785-25B6FA5F6B3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A097923B-DB06-40C7-9785-25B6FA5F6B3D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

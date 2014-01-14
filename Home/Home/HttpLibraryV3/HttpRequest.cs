@@ -57,6 +57,25 @@ namespace HttpLibrary
             }
         }
         /// <summary>
+        /// Gets the requested IR command
+        /// </summary>
+        public string RequestedCommand
+        {
+            get
+            {
+                int Count;
+                int Index = request_buffer.IndexOf('/') + 1;
+                for (Count = Index; request_buffer[Count] != ' ' && request_buffer[Count] != '?'; Count++) ;
+                int Length = Count - Index;
+                string Prefix = this.request_buffer.Substring(Index, Length);
+                if (Prefix != "cmd" && Prefix != "CMD") return null;
+                for (Index = ++Count; request_buffer[Count] != ' ' && request_buffer[Count] != '?'; Count++) ;
+                Length = Count - Index;
+                string Command = this.request_buffer.Substring(Index, Length);
+                return (Command == "") ? null : Command;
+            }
+        }
+        /// <summary>
         /// Class constructor
         /// </summary>
         /// <param name="buffer">Recieved buffer</param>

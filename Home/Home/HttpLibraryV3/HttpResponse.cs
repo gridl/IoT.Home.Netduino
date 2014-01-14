@@ -246,7 +246,7 @@ namespace HttpLibrary
         /// <summary>
         /// Sends all the files in the memory card as an index page  
         /// </summary>
-        public void WriteFilesList()
+        public void WriteFilesList(string answer)
         {
             string[] files = Directory.GetFiles(@"\SD");
             StringBuilder page = new StringBuilder();
@@ -254,6 +254,7 @@ namespace HttpLibrary
             
             page.Append("<html><head><title>File Directory</title></head>");
             page.Append("<body>");
+            page.Append("<h3 align=\"left\">" + answer + "</h3>"); 
             page.Append("<h2 align=\"center\">File Directory</h2>");
             page.Append("<hr>");
 

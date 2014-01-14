@@ -22,12 +22,13 @@ namespace Home
         static HttpServer Server;//server object
         static Credential ServerCredential;//server security
         static Configuration ServerConfiguration;//configuration settings
+        static DHTSensorScan _DHTSensorScan;//humidity & temperature
 
         public static void Main()
         {
             // Humidity and Temperature
             var RHT03 = new Dht22Sensor(Pins.GPIO_PIN_D0, Pins.GPIO_PIN_D1, PullUpResistor.Internal);
-            DHTSensorScan _DHTSensorScan = new DHTSensorScan(RHT03);
+            _DHTSensorScan = new DHTSensorScan(RHT03);
 
             //IRRX: Infrared Decoder
             NecProtocolDecoder decoder = new NecProtocolDecoder(Pins.GPIO_PIN_D7);
@@ -89,7 +90,11 @@ namespace Home
             }
             else
             {
-                Response.WriteFilesList();
+                var temperatureCelsius = _DHTSensorScan.Temperature;
+                var humidity = _DHTSensorScan.Humidity;
+                string answer = "DHT Sensor: RH = " + humidity.ToString("F1") + "%  Temp = " + temperatureCelsius.ToString("F1") + "°C ";
+
+                Response.WriteFilesList(answer);
 
                 //Response.WriteFile(Request.FilesPath + "home.html"); // TODO: produto
             }

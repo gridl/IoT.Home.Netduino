@@ -22,13 +22,22 @@ namespace Home
         static HttpServer Server;//server object
         static Credential ServerCredential;//server security
         static Configuration ServerConfiguration;//configuration settings
-        static DHTSensorScan _DHTSensorScan;//humidity & temperature
+        static DhtSensor Sensor;//humidity and temperature sensor
 
+        static Double temperature = 0;  // graus Celsius
+        static Double humidity = 0;     // %
+        
         public static void Main()
         {
+            TimeCounter timeCounter = new TimeCounter();
+            TimeSpan elapsed = TimeSpan.Zero;
+            int i = 0;
+
+            // On board led
+            OutputPort onBoardLed = new OutputPort(Pins.ONBOARD_LED, false);
+
             // Humidity and Temperature
-            var RHT03 = new Dht22Sensor(Pins.GPIO_PIN_D0, Pins.GPIO_PIN_D1, PullUpResistor.Internal);
-            _DHTSensorScan = new DHTSensorScan(RHT03);
+            Sensor = new Dht22Sensor(Pins.GPIO_PIN_D0, Pins.GPIO_PIN_D1, PullUpResistor.Internal);
 
             //IRRX: Infrared Decoder
             NecProtocolDecoder decoder = new NecProtocolDecoder(Pins.GPIO_PIN_D7);
@@ -48,30 +57,28 @@ namespace Home
             Server.OnRequestReceived += new OnRequestReceivedDelegate(Server_OnRequestReceived);
             Server.Start();
 
-            //// Web Server
-            //WebServer w = new WebServer(80, 10000);
-            //w.Start();
-            //w.CommandReceived += delegate(object o, WebServer.WebServerEventArgs e)
-            //{
-            //    //WebServer.OutPutStream(e.response, e.rawURL);
-            //    //if (RHT03.Read())
-            //    {
-            //        var temperatureCelsius = _DHTSensorScan.Temperature;
-            //        var humidity = _DHTSensorScan.Humidity;
-            //        string answer = "DHT Sensor: RH = " + humidity.ToString("F1") + "%  Temp = " + temperatureCelsius.ToString("F1") + "°C ";
-            //        Debug.Print(answer);
-            //        WebServer.OutPutStream(e.response, answer);
+            while (true)
+            {
+                timeCounter.Start();
+                {
+                    elapsed += timeCounter.Elapsed;
+                    if (elapsed.Seconds >= 2)
+                    {
+                        if (Sensor.Read())
+                        {
+                            temperature = Sensor.Temperature;
+                            humidity = Sensor.Humidity;
+                        }
+                        elapsed = TimeSpan.Zero;
+                        onBoardLed.Write((i++ & 0x01) == 0); // blink on board led
 
-            //        //string s = e.rawURL;
-
-            //        //codec.Send(0xFF, 0x0D); // leds on
-            //        //Thread.Sleep(1000);
-            //        //codec.Send(0xFF, 0x1F); // leds off
-            //    }
-            //};
-
-            // Loop forever reading Humidity & Temperature
-            _DHTSensorScan.GatherInput();
+                        //string log = "DHT Sensor: RH = " + humidity.ToString("F1") +
+                        //             "%  Temp = " + temperature.ToString("F1") + "°C ";
+                        //Debug.Print(log);
+                    }
+                }
+                timeCounter.Stop();
+            }
         }
 
         static void Server_OnRequestReceived(HttpRequest Request, HttpResponse Response)
@@ -90,11 +97,9 @@ namespace Home
             }
             else
             {
-                var temperatureCelsius = _DHTSensorScan.Temperature;
-                var humidity = _DHTSensorScan.Humidity;
-                string answer = "DHT Sensor: RH = " + humidity.ToString("F1") + "%  Temp = " + temperatureCelsius.ToString("F1") + "°C ";
+                string status = "DHT Sensor: RH = " + humidity.ToString("F1") + "%  Temp = " + temperature.ToString("F1") + "°C ";
 
-                Response.WriteFilesList(answer);
+                Response.WriteFilesList(status);
 
                 //Response.WriteFile(Request.FilesPath + "home.html"); // TODO: produto
             }

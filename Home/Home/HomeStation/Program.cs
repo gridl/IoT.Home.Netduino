@@ -26,19 +26,19 @@ namespace Home
 
         static Double temperature = 0;  // graus Celsius
         static Double humidity = 0;     // %
-        
+
         public static void Main()
         {
             TimeCounter timeCounter = new TimeCounter();
             TimeSpan elapsed = TimeSpan.Zero;
             int i = 0;
-
+            
             // On board led
             OutputPort onBoardLed = new OutputPort(Pins.ONBOARD_LED, false);
 
             // Humidity and Temperature
             Sensor = new Dht22Sensor(Pins.GPIO_PIN_D0, Pins.GPIO_PIN_D1, PullUpResistor.Internal);
-
+            
             //IRRX: Infrared Decoder
             NecProtocolDecoder decoder = new NecProtocolDecoder(Pins.GPIO_PIN_D7);
             NecProtocolDecoder.OnIRCommandReceived += NecDecoder_OnIRCommandReceived;
@@ -51,7 +51,7 @@ namespace Home
 
             // Web Server
             ServerConfiguration = new Configuration(80);
-            ServerCredential = new Credential("Jose Motta", "admin", "admin");
+            ServerCredential = new Credential("Administrator", "admin", "admin");
             Server = new HttpServer(ServerConfiguration, ServerCredential, @"\SD\");
             Server.OnServerError += new OnServerErrorDelegate(Server_OnServerError);
             Server.OnRequestReceived += new OnRequestReceivedDelegate(Server_OnRequestReceived);

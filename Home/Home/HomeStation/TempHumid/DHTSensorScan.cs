@@ -11,31 +11,24 @@ namespace HomeStation.TempHumid
 {
     public class DHTSensorScan
     {
+        private Double temperature = 0;
+        private Double humidity = 0;
         TimeCounter timeCounter = new TimeCounter();
         //Thread gather_input;
-
         TimeSpan elapsed = TimeSpan.Zero;
         TimeSpan elapsed1 = TimeSpan.Zero;
-
-        //AnalogInput analogInput;
-        Double temperature = 0;
-        Double humidity = 0;
-
         Double[] temp_history = new Double[10];
         Double[] humid_history = new Double[10];
-
         Int32 history_index = 0;
 
-        DhtSensor _sensor;
         OutputPort onBoardLed = new OutputPort(Pins.ONBOARD_LED, false);
 
         public DHTSensorScan(DhtSensor sensor)
         {
-            _sensor = sensor;
-            if (_sensor.Read())
+            if (sensor.Read())
             {
-                for (int i = 0; i < temp_history.Length; i++) temp_history[i] = _sensor.Temperature;
-                for (int i = 0; i < humid_history.Length; i++) humid_history[i] = _sensor.Humidity;
+                for (int i = 0; i < temp_history.Length; i++) temp_history[i] = sensor.Temperature;
+                for (int i = 0; i < humid_history.Length; i++) humid_history[i] = sensor.Humidity;
             }
             
             //Create scan task uncommenting lines below
@@ -48,7 +41,7 @@ namespace HomeStation.TempHumid
         }
 
 
-        public void GatherInput()
+        public void GatherInput(DhtSensor sensor)
         {
             while (true)
             {
@@ -59,10 +52,10 @@ namespace HomeStation.TempHumid
 
                     if (elapsed.Seconds >= 1)
                     {
-                        if (_sensor.Read())
+                        if (sensor.Read())
                         {
-                            temp_history[history_index] = _sensor.Temperature;
-                            humid_history[history_index] = _sensor.Humidity;
+                            temp_history[history_index] = sensor.Temperature;
+                            humid_history[history_index] = sensor.Humidity;
                         }
 
                         history_index++;
@@ -86,10 +79,10 @@ namespace HomeStation.TempHumid
                         humidity = (tmp / humid_history.Length);
 
                         elapsed1 = TimeSpan.Zero;
-                        
-                        //string log = "DHT Sensor: RH = " + humidity.ToString("F1") +
-                        //                    "%  Temp = " + temperature.ToString("F1") + "°C ";
-                        //Debug.Print(log);                            
+
+                        string log = "DHT Sensor: RH = " + humidity.ToString("F1") +
+                                            "%  Temp = " + temperature.ToString("F1") + "°C ";
+                        Debug.Print(log);                            
                     }
                 }
                 timeCounter.Stop();

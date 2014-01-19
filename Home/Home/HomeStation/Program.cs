@@ -34,6 +34,18 @@ namespace Home
             TimeCounter timeCounter = new TimeCounter();
             TimeSpan elapsed = TimeSpan.Zero;
             int i = 0;
+
+            // Try to get clock at system start
+            try
+            {
+                var time = NtpClient.GetNetworkTime();
+                Utility.SetLocalTime(time);
+            }
+            catch (Exception ex)
+            {
+                // Don't depend on time
+                Debug.Print("Error setting clock: " + ex.Message);
+            }
             
             // On board led
             OutputPort onBoardLed = new OutputPort(Pins.ONBOARD_LED, false);

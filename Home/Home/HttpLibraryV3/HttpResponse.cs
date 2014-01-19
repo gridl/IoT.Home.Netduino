@@ -254,6 +254,7 @@ namespace HttpLibrary
             
             page.Append("<html><head><title>File Directory</title></head>");
             page.Append("<body>");
+            page.Append("<h3 align=\"left\">" + DateTime.Now.ToString() + "</h3>");
             page.Append("<h3 align=\"left\">" + answer + "</h3>"); 
             page.Append("<h2 align=\"center\">File Directory</h2>");
             page.Append("<hr>");

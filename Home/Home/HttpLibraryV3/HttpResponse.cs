@@ -5,6 +5,8 @@ using System.Net.Sockets;
 using System.IO;
 using System.Text;
 
+using Microsoft.SPOT.Hardware;
+
 namespace HttpLibrary
 {
     /// <summary>
@@ -254,7 +256,8 @@ namespace HttpLibrary
             
             page.Append("<html><head><title>File Directory</title></head>");
             page.Append("<body>");
-            page.Append("<h3 align=\"left\">" + DateTime.Now.ToString() + "</h3>");
+            page.Append("<h3 align=\"left\">" + "Local Time: " + DateTime.Now.ToString() + "</h3>");
+            page.Append("<h3 align=\"left\">" + "System Time: " + Utility.GetMachineTime().ToString() + "</h3>");
             page.Append("<h3 align=\"left\">" + answer + "</h3>"); 
             page.Append("<h2 align=\"center\">File Directory</h2>");
             page.Append("<hr>");

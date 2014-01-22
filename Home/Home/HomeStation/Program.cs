@@ -9,6 +9,7 @@ using SecretLabs.NETMF.Hardware.Netduino;
 
 using System.IO;
 using HttpLibrary;
+using HttpFileServer;
 
 using HomeStation.InfraRed.Encoder;
 using HomeStation.InfraRed.Decoder;
@@ -70,6 +71,9 @@ namespace Home
             Server.OnServerError += new OnServerErrorDelegate(Server_OnServerError);
             Server.OnRequestReceived += new OnRequestReceivedDelegate(Server_OnRequestReceived);
             Server.Start();
+
+            // File Server
+            FileServer server = new FileServer(@"\SD\", 1554);
 
             while (true)
             {

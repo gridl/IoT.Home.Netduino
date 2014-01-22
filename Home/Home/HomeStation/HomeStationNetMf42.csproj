@@ -57,6 +57,10 @@
     <Content Include="TempHumid\temp.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\FileServer\HttpFileServer.csproj">
+      <Project>{2EA8E1F9-F1CE-440D-BFA5-645DC6BB3993}</Project>
+      <Name>HttpFileServer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\HttpLibraryV3\HttpLibraryV3.csproj">
       <Project>{A097923B-DB06-40C7-9785-25B6FA5F6B3D}</Project>
       <Name>HttpLibraryV3</Name>

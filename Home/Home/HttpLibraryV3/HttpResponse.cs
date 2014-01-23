@@ -255,6 +255,13 @@ namespace HttpLibrary
             string file_name = "";
             
             page.Append("<html><head><title>File Directory</title></head>");
+            page.Append("<script type=\"text/JavaScript\">\n");
+            page.Append("<!--\n");
+            page.Append("function timedRefresh(timeoutPeriod) {setTimeout(\"location.reload(true);\",timeoutPeriod); }\n");
+            page.Append("//   -->\n");
+            page.Append("</script>\n");
+            
+            page.Append("</head>");
             page.Append("<body>");
             page.Append("<h3 align=\"left\">" + "Local Time: " + DateTime.Now.ToString() + "</h3>");
             page.Append("<h3 align=\"left\">" + "System Time: " + Utility.GetMachineTime().ToString() + "</h3>");

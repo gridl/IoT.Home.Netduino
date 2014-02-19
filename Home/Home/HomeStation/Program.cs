@@ -24,8 +24,9 @@ namespace Home
         static Credential ServerCredential;//server security
         static Configuration ServerConfiguration;//configuration settings
         static DhtSensor Sensor;//humidity and temperature sensor
-        static InfraredTransmitter InfraredTransmitter;
-        static InfraredCodecNEC InfraredCodec;
+
+        //static InfraredTransmitter InfraredTransmitter1;
+        static InfraredCodecNEC IRCodec1, IRCodec2;
 
         static Double temperature = 0;  // graus Celsius
         static Double humidity = 0;     // %
@@ -47,20 +48,20 @@ namespace Home
                 // Don't depend on time
                 Debug.Print("Error setting clock: " + ex.Message);
             }
-            
+
             // On board led
             OutputPort onBoardLed = new OutputPort(Pins.ONBOARD_LED, false);
 
             // Humidity and Temperature
             Sensor = new Dht22Sensor(Pins.GPIO_PIN_D0, Pins.GPIO_PIN_D1, PullUpResistor.Internal);
-            
+
             //IRRX: Infrared Decoder
             NecProtocolDecoder decoder = new NecProtocolDecoder(Pins.GPIO_PIN_D7);
             NecProtocolDecoder.OnIRCommandReceived += NecDecoder_OnIRCommandReceived;
 
             //IRTX: Infrared Encoder
-            InfraredTransmitter = new InfraredTransmitter(Pins.GPIO_PIN_D8);
-            InfraredCodec = new InfraredCodecNEC(InfraredTransmitter);
+            IRCodec1 = new InfraredCodecNEC(new InfraredTransmitter(Pins.GPIO_PIN_D8));
+            IRCodec2 = new InfraredCodecNEC(new InfraredTransmitter(Pins.GPIO_PIN_D9));
 
             Thread.Sleep(1000);
 
@@ -80,7 +81,7 @@ namespace Home
                 timeCounter.Start();
                 {
                     elapsed += timeCounter.Elapsed;
-                    if (elapsed.Seconds >= 2)
+                    if (elapsed.Seconds >= 1)
                     {
                         if (Sensor.Read())
                         {
@@ -89,6 +90,40 @@ namespace Home
                         }
                         elapsed = TimeSpan.Zero;
                         onBoardLed.Write((i++ & 0x01) == 0); // blink on board led
+
+                        if ((i & 0x02) == 0)
+                        {
+                            if ((i & 0x01) == 0)
+                            {
+                                IRCodec1.Send(0x10, 0x0D);
+                            }
+                            else
+                            {
+                                IRCodec1.Send(0x10, 0x1F);
+                            }
+                        }
+                        else
+                        {
+                            if ((i & 0x01) == 0)
+                            {
+                                IRCodec2.Send(0x10, 0x03);
+                            }
+                            else
+                            {
+                                IRCodec2.Send(0x10, 0x02);
+                            }
+                        }
+
+                        //if ((i & 0x01) == 0)
+                        //{
+                        //    IRCodec1.Send(0x10, 0x0D);
+                        //    IRCodec2.Send(0x10, 0x03);
+                        //}
+                        //else
+                        //{
+                        //    IRCodec1.Send(0x10, 0x1F);
+                        //    IRCodec2.Send(0x10, 0x02);
+                        //}
 
                         //string log = "DHT Sensor: RH = " + humidity.ToString("F1") +
                         //             "%  Temp = " + temperature.ToString("F1") + "°C ";
@@ -108,30 +143,53 @@ namespace Home
                 switch (Request.RequestedCommand.ToLower())
                 {
                     case "on":
-                        cmd = 0x0D;         // ON
+                        cmd = 0x03;         // ON
                         break;
                     case "off":
-                        cmd = 0x1F;         // OFF
+                        cmd = 0x02;         // OFF
                         break;
                     case "white":
-                        cmd = 0x15;         // WHITE
+                        cmd = 0x07;         // WHITE
                         break;
                     case "green":
-                        cmd = 0x1B;         // GREEN
+                        cmd = 0x05;         // GREEN
                         break;
                     case "red":
-                        cmd = 0x19;         // RED
+                        cmd = 0x04;         // RED
                         break;
                     case "blue":
-                        cmd = 0x11;         // BLUE
+                        cmd = 0x06;         // BLUE
                         break;
                     default:                // NONE
                         break;
                 }
 
-                if (cmd != 0) InfraredCodec.Send(0xFF, cmd);    // Address is ignored by current led stripes
+                //{
+                //    case "on":
+                //        cmd = 0x0D;         // ON
+                //        break;
+                //    case "off":
+                //        cmd = 0x1F;         // OFF
+                //        break;
+                //    case "white":
+                //        cmd = 0x15;         // WHITE
+                //        break;
+                //    case "green":
+                //        cmd = 0x1B;         // GREEN
+                //        break;
+                //    case "red":
+                //        cmd = 0x19;         // RED
+                //        break;
+                //    case "blue":
+                //        cmd = 0x11;         // BLUE
+                //        break;
+                //    default:                // NONE
+                //        break;
+                //}
 
-                Response.WriteFilesList("Comando " + Request.RequestedCommand.ToLower() + ": Addr=0xFF Cmd=" + IntToHexString(cmd));
+                if (cmd != 0) IRCodec1.Send(0x10, cmd);    // Address is ignored by current led stripes
+
+                Response.WriteFilesList("Comando " + Request.RequestedCommand.ToLower() + ": Cmd=" + IntToHexString(cmd));
             }
             else if (Request.RequestedFile != null)
             {

@@ -66,6 +66,9 @@ namespace HomeStation.InfraRed.Encoder
             int notaddress = address ^ 0xFF;    // inverte byte: address
             int notcommand = command ^ 0xFF;    // inverte byte: command
 
+            //address = 0x10;
+            //notaddress = 0xFF;
+
             //place the "START" pattern
             this.MarkStart();
 

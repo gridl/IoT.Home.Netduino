@@ -91,28 +91,28 @@ namespace Home
                         elapsed = TimeSpan.Zero;
                         onBoardLed.Write((i++ & 0x01) == 0); // blink on board led
 
-                        if ((i & 0x02) == 0)
-                        {
-                            if ((i & 0x01) == 0)
-                            {
-                                IRCodec1.Send(0x10, 0x0D);
-                            }
-                            else
-                            {
-                                IRCodec1.Send(0x10, 0x1F);
-                            }
-                        }
-                        else
-                        {
-                            if ((i & 0x01) == 0)
-                            {
-                                IRCodec2.Send(0x10, 0x03);
-                            }
-                            else
-                            {
-                                IRCodec2.Send(0x10, 0x02);
-                            }
-                        }
+                        //if ((i & 0x02) == 0)
+                        //{
+                        //    if ((i & 0x01) == 0)
+                        //    {
+                        //        IRCodec1.Send(0x10, 0x0D);
+                        //    }
+                        //    else
+                        //    {
+                        //        IRCodec1.Send(0x10, 0x1F);
+                        //    }
+                        //}
+                        //else
+                        //{
+                        //    if ((i & 0x01) == 0)
+                        //    {
+                        //        IRCodec2.Send(0x10, 0x03);
+                        //    }
+                        //    else
+                        //    {
+                        //        IRCodec2.Send(0x10, 0x02);
+                        //    }
+                        //}
 
                         //if ((i & 0x01) == 0)
                         //{

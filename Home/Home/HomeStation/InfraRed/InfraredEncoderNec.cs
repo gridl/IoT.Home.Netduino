@@ -42,7 +42,7 @@ namespace HomeStation.InfraRed.Encoder
         // The recommended carrier duty-cycle is 1/4 or 1/3. 
 
         private const float CarrierFrequency = 38.0f;   //kHz
-        private const float PulseDuty = 0.25f;
+        private const float PulseDuty = 0.3f;
         private const int PulseBurstCount = 21;
 
         /// <summary>
@@ -57,7 +57,7 @@ namespace HomeStation.InfraRed.Encoder
         /// <summary>
         /// Send a NEC message
         /// </summary>
-        /// <param name="address">Specifies the address in the message</param>
+        /// <param name="address">Specifies the 8-bit address in the message</param>
         /// <param name="command">Specifies the command to be sent</param>
         public void Send(
             int address,
@@ -65,9 +65,6 @@ namespace HomeStation.InfraRed.Encoder
         {
             int notaddress = address ^ 0xFF;    // inverte byte: address
             int notcommand = command ^ 0xFF;    // inverte byte: command
-
-            //address = 0x10;
-            //notaddress = 0xFF;
 
             //place the "START" pattern
             this.MarkStart();
@@ -109,11 +106,61 @@ namespace HomeStation.InfraRed.Encoder
         }
 
         /// <summary>
+        /// Send an Extended NEC message
+        /// </summary>
+        /// <param name="address">Specifies the 16-bit address in the message</param>
+        /// <param name="command">Specifies the command to be sent</param>
+        public void SendExtended(
+            int address,
+            int command)
+        {
+            int notcommand = command ^ 0xFF;
+
+            //place the "START" pattern
+            this.MarkStart();
+
+            //low address (8 bits, LSB first)
+            for (int i = 0; i < 8; i++)
+            {
+                this.Modulate((address & 0x01) != 0);
+                address >>= 1;
+            }
+
+            //high address (8 bits, LSB first)
+            for (int i = 0; i < 8; i++)
+            {
+                this.Modulate((address & 0x01) != 0);
+                address >>= 1;
+            }
+
+            //command (8 bits, LSB first)
+            for (int i = 0; i < 8; i++)
+            {
+                this.Modulate((command & 0x01) != 0);
+                command >>= 1;
+            }
+
+            //notcommand (8 bits, LSB first)
+            for (int i = 0; i < 8; i++)
+            {
+                this.Modulate((notcommand & 0x01) != 0);
+                notcommand >>= 1;
+            }
+
+            //place the "END" pattern
+            this.MarkEnd();
+
+            //send
+            this.Transmitter.Send(this);
+
+        }
+
+        /// <summary>
         /// Mark the start pattern of the NEC message
         /// </summary>
         private void MarkStart()
         {
-            //"START": 336 pulses + 168 blanks = 504 as total
+            //na teoria: "START" 336 pulses + 168 blanks = 504 as total
             // parâmetros ajustados com ajuda do oscilosópio para 9 ms e 4.5 ms
             this.TotalPulseCount = 560; // (16 + 8) * PulseBurstCount;
             this.InitialPulseCount = 360; // 16 * PulseBurstCount;
@@ -129,7 +176,7 @@ namespace HomeStation.InfraRed.Encoder
         /// </summary>
         private void MarkEnd()
         {
-            //"END": 21 pulses + 21 blanks = 42 as total
+            //na teoria: "END" 21 pulses + 21 blanks = 42 as total
             this.TotalPulseCount = PulseBurstCount * 2;
             this.InitialPulseCount = PulseBurstCount;
             this.FinalPulseCount = 0;

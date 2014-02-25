@@ -44,7 +44,7 @@ namespace HomeStation.InfraRed.Encoder
         private ushort[] _outputBuffer = new ushort[100];
         private int _outputCount;
         private OutputPort _enable;
-        private InfraredCodecBase _lastCodec;
+        private InfraredCodecBase _lastCodec = null;
 
 
 

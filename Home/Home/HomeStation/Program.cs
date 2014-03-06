@@ -30,6 +30,7 @@ namespace Home
 
         static Double temperature = 0;  // graus Celsius
         static Double humidity = 0;     // %
+        static string status = "Ligado";
 
         public static void Main()
         {
@@ -87,6 +88,7 @@ namespace Home
                         {
                             temperature = Sensor.Temperature;
                             humidity = Sensor.Humidity;
+                            status = "DHT Sensor: RH = " + humidity.ToString("F1") + "%  Temp = " + temperature.ToString("F1") + "°C ";
                         }
                         elapsed = TimeSpan.Zero;
                         onBoardLed.Write((i++ & 0x01) == 0); // blink on board led
@@ -141,55 +143,55 @@ namespace Home
             if (Request.RequestedCommand != null)
             {
                 switch (Request.RequestedCommand.ToLower())
-                {
-                    case "on":
-                        cmd = 0x03;         // ON
-                        break;
-                    case "off":
-                        cmd = 0x02;         // OFF
-                        break;
-                    case "white":
-                        cmd = 0x07;         // WHITE
-                        break;
-                    case "green":
-                        cmd = 0x05;         // GREEN
-                        break;
-                    case "red":
-                        cmd = 0x04;         // RED
-                        break;
-                    case "blue":
-                        cmd = 0x06;         // BLUE
-                        break;
-                    default:                // NONE
-                        break;
-                }
-
                 //{
                 //    case "on":
-                //        cmd = 0x0D;         // ON
+                //        cmd = 0x03;         // ON
                 //        break;
                 //    case "off":
-                //        cmd = 0x1F;         // OFF
+                //        cmd = 0x02;         // OFF
                 //        break;
                 //    case "white":
-                //        cmd = 0x15;         // WHITE
+                //        cmd = 0x07;         // WHITE
                 //        break;
                 //    case "green":
-                //        cmd = 0x1B;         // GREEN
+                //        cmd = 0x05;         // GREEN
                 //        break;
                 //    case "red":
-                //        cmd = 0x19;         // RED
+                //        cmd = 0x04;         // RED
                 //        break;
                 //    case "blue":
-                //        cmd = 0x11;         // BLUE
+                //        cmd = 0x06;         // BLUE
                 //        break;
                 //    default:                // NONE
                 //        break;
                 //}
 
+                {
+                    case "on":
+                        cmd = 0x0D;         // ON
+                        break;
+                    case "off":
+                        cmd = 0x1F;         // OFF
+                        break;
+                    case "white":
+                        cmd = 0x15;         // WHITE
+                        break;
+                    case "green":
+                        cmd = 0x1B;         // GREEN
+                        break;
+                    case "red":
+                        cmd = 0x19;         // RED
+                        break;
+                    case "blue":
+                        cmd = 0x11;         // BLUE
+                        break;
+                    default:                // NONE
+                        break;
+                }
+
                 if (cmd != 0) IRCodec1.Send(0x10, cmd);    // Address is ignored by current led stripes
 
-                Response.WriteFilesList("Comando " + Request.RequestedCommand.ToLower() + ": Cmd=" + IntToHexString(cmd));
+                Response.WriteFilesList(status + "<br>" + "Comando " + Request.RequestedCommand.ToLower() + ": Cmd=" + IntToHexString(cmd));
             }
             else if (Request.RequestedFile != null)
             {
@@ -205,8 +207,6 @@ namespace Home
             }
             else
             {
-                string status = "DHT Sensor: RH = " + humidity.ToString("F1") + "%  Temp = " + temperature.ToString("F1") + "°C ";
-
                 Response.WriteFilesList(status);
 
                 //Response.WriteFile(Request.FilesPath + "home.html"); // TODO: produto

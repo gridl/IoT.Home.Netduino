@@ -14,7 +14,7 @@ using HttpFileServer;
 using HomeStation.InfraRed.Encoder;
 using HomeStation.InfraRed.Decoder;
 using HomeStation.TempHumid;
-//using HomeStation.WebServer;
+using HomeStation.Light;
 
 namespace Home
 {
@@ -26,11 +26,21 @@ namespace Home
         static DhtSensor Sensor;//humidity and temperature sensor
 
         //static InfraredTransmitter InfraredTransmitter1;
-        static InfraredCodecNEC IRCodec1, IRCodec2;
+        //static InfraredCodecNEC IRCodec1, IRCodec2;
 
         static Double temperature = 0;  // graus Celsius
         static Double humidity = 0;     // %
         static string status = "Ligado";
+
+        static InfraredLight[] ledlights = {
+                                               new InfraredLight("SylvaniaStripe", new InfraredCodecNEC(new InfraredTransmitter(Pins.GPIO_PIN_D8)), 0x00),
+                                               new InfraredLight("DXStripe", new InfraredCodecNEC(new InfraredTransmitter(Pins.GPIO_PIN_D9)), 0x10)
+                                           };
+        static Lumi[] luminary = {
+                                     new Lumi("WallLight", ledlights[0]),
+                                     new Lumi("UPLight", ledlights[1]),
+                                     new Lumi("DownLight", ledlights[1])
+                                 };
 
         public static void Main()
         {
@@ -61,8 +71,8 @@ namespace Home
             NecProtocolDecoder.OnIRCommandReceived += NecDecoder_OnIRCommandReceived;
 
             //IRTX: Infrared Encoder
-            IRCodec1 = new InfraredCodecNEC(new InfraredTransmitter(Pins.GPIO_PIN_D8));
-            IRCodec2 = new InfraredCodecNEC(new InfraredTransmitter(Pins.GPIO_PIN_D9));
+            //IRCodec1 = new InfraredCodecNEC(new InfraredTransmitter(Pins.GPIO_PIN_D8));
+            //IRCodec2 = new InfraredCodecNEC(new InfraredTransmitter(Pins.GPIO_PIN_D9));
 
             Thread.Sleep(1000);
 
@@ -93,6 +103,7 @@ namespace Home
                         elapsed = TimeSpan.Zero;
                         onBoardLed.Write((i++ & 0x01) == 0); // blink on board led
 
+                        #region sendIRtest
                         //if ((i & 0x01) == 0)
                         //{
                         //    if ((i & 0x02) == 0)
@@ -148,11 +159,14 @@ namespace Home
                         //{
                         //    IRCodec1.Send(0x10, 0x1F);
                         //    IRCodec2.Send(0x10, 0x02);
-                        //}
+                        //} 
+                        #endregion
 
+                        #region log
                         //string log = "DHT Sensor: RH = " + humidity.ToString("F1") +
                         //             "%  Temp = " + temperature.ToString("F1") + "°C ";
-                        //Debug.Print(log);
+                        //Debug.Print(log); 
+                        #endregion
                     }
                 }
                 timeCounter.Stop();
@@ -166,6 +180,7 @@ namespace Home
             if (Request.RequestedCommand != null)
             {
                 switch (Request.RequestedCommand.ToLower())
+                #region DxLedStripe
                 //{
                 //    case "on":
                 //        cmd = 0x03;         // ON
@@ -187,8 +202,8 @@ namespace Home
                 //        break;
                 //    default:                // NONE
                 //        break;
-                //}
-
+                //} 
+                #endregion
                 {
                     case "on":
                         cmd = 0x0D;         // ON
@@ -212,7 +227,9 @@ namespace Home
                         break;
                 }
 
-                if (cmd != 0) IRCodec1.Send(0x10, cmd);    // Address is ignored by current led stripes
+                //if (cmd != 0) IRCodec1.Send(0x10, cmd);    // Address is ignored by current led stripes
+
+                if (cmd != 0) luminary[0].Send(cmd);    // for testing
 
                 Response.WriteFilesList(status + "<br>" + "Comando " + Request.RequestedCommand.ToLower() + ": Cmd=" + IntToHexString(cmd));
             }

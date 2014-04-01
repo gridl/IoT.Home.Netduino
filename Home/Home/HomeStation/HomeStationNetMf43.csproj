@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <AssemblyName>HomeStation</AssemblyName>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>HomeStation</RootNamespace>
+    <ProjectTypeGuids>{b69e3092-b931-443c-abe7-7e7b65f2a37f};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{9B31E188-7210-411F-A201-BAA6F71D0A88}</ProjectGuid>
+    <TargetFrameworkVersion>v4.3</TargetFrameworkVersion>
+    <NetMfTargetsBaseDir Condition="'$(NetMfTargetsBaseDir)'==''">$(MSBuildExtensionsPath32)\Microsoft\.NET Micro Framework\</NetMfTargetsBaseDir>
+    <DeployDevice>Netduino</DeployDevice>
+    <DeployTransport>USB</DeployTransport>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <Import Project="$(NetMfTargetsBaseDir)$(TargetFrameworkVersion)\CSharp.Targets" />
+  <ItemGroup>
+    <Compile Include="InfraRed\InfraredEncoderBase.cs" />
+    <Compile Include="InfraRed\InfraredEncoderNec.cs" />
+    <Compile Include="InfraRed\InfraredEncoderRC5.cs" />
+    <Compile Include="InfraRed\InfraredEncoderSamsung.cs" />
+    <Compile Include="InfraRed\InfraredEncoderSonySIRC.cs" />
+    <Compile Include="InfraRed\InfraredTransmitter.cs" />
+    <Compile Include="InfraRed\InfraredDecoderNec.cs" />
+    <Compile Include="InfraRed\InfraredDecoderRC6.cs" />
+    <Compile Include="Light\InfraredLight.cs" />
+    <Compile Include="Light\Lumi.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="TempHumid\DHTSensor.cs" />
+    <Compile Include="TempHumid\RHT03.cs" />
+    <Compile Include="TempHumid\TemperatureSensor.cs" />
+    <Compile Include="TempHumid\PullUpResistor.cs" />
+    <Compile Include="TempHumid\TimeCounter.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Tools\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="InfraRed\LutronMaestroLightDimmer.txt" />
+    <Content Include="TempHumid\temp.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FileServer\HttpFileServer.csproj">
+      <Project>{2EA8E1F9-F1CE-440D-BFA5-645DC6BB3993}</Project>
+      <Name>HttpFileServer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HttpLibraryV3\HttpLibraryV3.csproj">
+      <Project>{A097923B-DB06-40C7-9785-25B6FA5F6B3D}</Project>
+      <Name>HttpLibraryV3</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.SPOT.Hardware" />
+    <Reference Include="Microsoft.SPOT.Hardware.PWM" />
+    <Reference Include="Microsoft.SPOT.Hardware.SerialPort" />
+    <Reference Include="Microsoft.SPOT.Native" />
+    <Reference Include="Microsoft.SPOT.Net" />
+    <Reference Include="SecretLabs.NETMF.Hardware, Version=4.3.0.0, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="SecretLabs.NETMF.Hardware.Netduino, Version=4.3.0.0, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="SecretLabs.NETMF.Hardware.NetduinoPlus, Version=4.3.0.0, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="SecretLabs.NETMF.IO, Version=4.3.0.0, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.IO" />
+  </ItemGroup>
+</Project>

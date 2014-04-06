@@ -168,7 +168,7 @@ namespace Home
             if (Request.RequestedCommand != null)
             {
                 switch (Request.RequestedCommand.ToLower())
-                #region dxled
+                #region dxled parser
                 //{
                 //    case "on":
                 //        cmd = 0x03;         // ON
@@ -192,6 +192,7 @@ namespace Home
                 //        break;
                 //} 
                 #endregion
+                #region sylvania parser
                 {
                     case "on":
                         cmd = 0x0D;         // ON
@@ -213,7 +214,8 @@ namespace Home
                         break;
                     default:                // NONE
                         break;
-                }
+                } 
+                #endregion
 
                 if (cmd != 0) IRCodec1.Send(0x10, cmd);    // Address is ignored by current led stripes
 

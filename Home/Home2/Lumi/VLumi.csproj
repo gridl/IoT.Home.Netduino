@@ -1,16 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <AssemblyName>Json.NetMF</AssemblyName>
+    <AssemblyName>Lumi</AssemblyName>
     <OutputType>Library</OutputType>
-    <RootNamespace>Json.NetMF</RootNamespace>
+    <RootNamespace>Lumi</RootNamespace>
     <ProjectTypeGuids>{b69e3092-b931-443c-abe7-7e7b65f2a37f};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{5995FC6C-A484-4A48-A75B-00B35F08F092}</ProjectGuid>
+    <ProjectGuid>{E292E9FC-98D3-4CC4-BB9E-B72BBAC7C18C}</ProjectGuid>
     <TargetFrameworkVersion>v4.3</TargetFrameworkVersion>
     <NetMfTargetsBaseDir Condition="'$(NetMfTargetsBaseDir)'==''">$(MSBuildExtensionsPath32)\Microsoft\.NET Micro Framework\</NetMfTargetsBaseDir>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -28,22 +27,22 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Release\Json.NetMF.XML</DocumentationFile>
   </PropertyGroup>
   <Import Project="$(NetMfTargetsBaseDir)$(TargetFrameworkVersion)\CSharp.Targets" />
   <ItemGroup>
-    <Compile Include="DateTimeExtensions.cs" />
-    <Compile Include="JsonParser.cs" />
-    <Compile Include="JsonSerializer.cs" />
-    <Compile Include="NumberExtensions.cs" />
+    <Compile Include="Controller.cs" />
+    <Compile Include="Light.cs" />
+    <Compile Include="Lumi.cs" />
+    <Compile Include="LumiCmd.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StringExtensions.cs" />
+    <Compile Include="Scene.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.SPOT.Native">
     </Reference>
+    <Reference Include="System.IO" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="zReadme.md" />
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
 </Project>

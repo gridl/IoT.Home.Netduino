@@ -19,6 +19,28 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.Emulator.Json", "Test\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VLumi", "Lumi\VLumi.csproj", "{E292E9FC-98D3-4CC4-BB9E-B72BBAC7C18C}"
 EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "WebMin", "http://localhost:58999", "{4BF9A8DB-64D6-474A-842E-55C4AE2059E5}"
+	ProjectSection(WebsiteProperties) = preProject
+		UseIISExpress = "true"
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5.1"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_58999"
+		Debug.AspNetCompiler.PhysicalPath = "WebMin\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_58999\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_58999"
+		Release.AspNetCompiler.PhysicalPath = "WebMin\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_58999\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		SlnRelativePath = "WebMin\"
+		DefaultWebSiteLanguage = "Visual C#"
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -127,6 +149,16 @@ Global
 		{E292E9FC-98D3-4CC4-BB9E-B72BBAC7C18C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{E292E9FC-98D3-4CC4-BB9E-B72BBAC7C18C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{E292E9FC-98D3-4CC4-BB9E-B72BBAC7C18C}.Release|x86.ActiveCfg = Release|Any CPU
+		{4BF9A8DB-64D6-474A-842E-55C4AE2059E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4BF9A8DB-64D6-474A-842E-55C4AE2059E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4BF9A8DB-64D6-474A-842E-55C4AE2059E5}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{4BF9A8DB-64D6-474A-842E-55C4AE2059E5}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{4BF9A8DB-64D6-474A-842E-55C4AE2059E5}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{4BF9A8DB-64D6-474A-842E-55C4AE2059E5}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{4BF9A8DB-64D6-474A-842E-55C4AE2059E5}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{4BF9A8DB-64D6-474A-842E-55C4AE2059E5}.Release|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{4BF9A8DB-64D6-474A-842E-55C4AE2059E5}.Release|Mixed Platforms.Build.0 = Debug|Any CPU
+		{4BF9A8DB-64D6-474A-842E-55C4AE2059E5}.Release|x86.ActiveCfg = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

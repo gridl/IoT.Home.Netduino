@@ -130,3 +130,120 @@ At this point, you should have a small list of parts that look like good candida
 #####Iterate: Rinse and repeat
 
 As you learn about available parts, you may discover new constraints.  For example, the candidate parts may only support an interface that your processor doesn’t.  In this case, you have to find a new processor or change your design.  Or you may find an ideal part but its required power rail voltage is different than all the other parts on your board.  Expect to iterate on your entire part search and change other parts of the design to accommodate them.
+
+#####Outsource your search
+
+There are many people in the hardware ecosystem who can help you find the right part.  Part manufacturers, distributors, and sales reps all employ technical people who work with these parts every day.  Their job is to help you find the right part and they often do a good job about it.  Email or call their sales office, describe your application, and ask them to suggest parts.  This has saved me lots of time and has introduced me to parts I didn’t know about.
+
+#####Use FAEs as technical advisors
+
+If you are working with technology that’s new to you, sometimes you don’t even know what tradeoffs to consider when choosing parts.  You could spend hours reading on the Internet to get familiar with the technology.  But I find there’s a much better and faster way.  Simply find one of the biggest vendors in the space, email/call the sales office, and ask to speak with a Field Applications Engineer (FAE) who specializes in this technology.  They will be happy to speak to you.  Then be honest with her that you don’t know anything and explain what you’re trying to build.  They will start asking you all the questions you should be asking yourself.  You may not have answers in that moment but you’ll learn what’s important to consider.
+
+#####Look legit
+
+When reaching out for help it’s important that you look like a legitimate company.  This is because **all these people are helping you in the hopes that you buy a chip that they sell**.  But they don’t want to waste time if they think you’re a hobbyist working from your garage.  Make sure you have a professional company website or landing page and send emails from your company domain.
+
+###How to Price your HW Product - Raw Material
+
+If you’re building a HW product, you’ve inevitably wondered:
+
+1. How much can I sell it for?
+2. How much money can I make?
+
+#####Electronics & PCB
+
+The main points worth noting here:
+
+- 70 – 90% of your product cost will come from 20 – 40% of components. This means that if you haven’t fully finalized your design yet, don’t lose sleep over trying to find a source for every single component (at least not yet), especially for sundry items like resistors and capacitors (that don’t have any special requirements). You will have a handful of core, critical components which need to be carefully chosen to keep cost low and ensure long term supply (e.g. don’t choose something that you know is going to go end of life in a year or two).
+- The mark ups that suppliers (such as RS, Element14, Digikey, etc) apply to components is similar to that of contract manufacturers (CM), so the price breaks (discounts at volume) that you receive from both (up until around the 10,000 mark at least) are roughly equivalent.
+
+The price breaks you can expect relative to one-off pricing for electronic components are:  
+
+- 100 off (15 – 25% discount from one-off pricing)
+- 1,000 off (30 – 50% discount from one-off pricing)
+
+#####Enclosure
+
+The next item to consider is the per-unit cost of the enclosure. Enclosure costs vary significantly based on a number of factors, such as:
+
+- Whether it is an off-the-shelf or custom designed enclosure
+- Manufacturing technique (3D printing, injection moulding, rotational moulding, etc)
+- Base material (aluminium, ABS plastic, etc)
+- Material additives (UV stabilisers, pigments, anodising, etc)
+- Enclosure complexity (physical design as well as number of parts to be assembled)
+- Production volume
+
+Given the large number of variables it is difficult to point to exact price breaks, except saying that they can be significant (e.g. a small, 10 off ABS injection moulded cases could be $3 - $5 each, whereas at volumes of 40,000 could be as cheap as 17c each).
+
+#####Assembly & Functional Testing:
+
+Assembly and functional testing cost is largely dependent on the assembly complexity of the product, how well DFM (design for manufacturing) principles have been applied.  The type of testing is impactful as well: automated testing equipment (ATE, more on this below) or manual labour testing. If you haven’t had a chance to talk to a CM yet and got a quote, a rough rule of thumb of 4 – 8% of hardware cost can be used to estimate this.
+
+#####Pre-programming:
+
+Does your product have a flash memory, EEPROM, or some other programmable device that needs to be pre-programmed?  Be sure to include the costs of this.  Major parts distributors offer programming services and can take care of this for you and the part can just be soldered onto the PCB during assembly.  Otherwise your CM will have to program the part (either before or after assembly) and you’ll have to help with the details.
+
+#####Highly Accelerated Stress Screening (HASS):
+
+HASS is essentially a post assembly stress testing method designed to incite infant mortality failure of components, through all-axis vibration and rapid thermal cycling. HASS testing is carried out so that failures happen in the manufacturing environment (where they can be fixed), instead of in the field where either a recall, replacement, or in-field repair would be necessary. A useful rule of thumb is to allocate 2 – 4% of your total hardware costs.
+
+#####Manufacturing Yield:
+
+Manufacturing is not a perfect process and you’ll always get a small number of product which don’t work when coming off of the production line. Tombstoning, insufficient wetting, bridging (especially if doing reflow soldering), poor manufacturing practices and more can cause issues. Sometimes the heat profiles of automated soldering equipment induce infant mortality in components, even prior to HASS tests. 
+
+In reality yield failure can run anywhere from 0.5% through to 5% (even up to 10% in extreme cases), and depends on a variety of factors such as:
+
+- Quality of components
+- Number of components placed
+- Footprint complexity of components placed (BGA vs. SOIC8 vs. 0802 resistors)
+- Solder quality and type (lead vs lead free)
+- Quality of manufacturing processes & systems in place
+
+A good manufacturing process should provide a high yield rate (e.g. a low failure rate), but this can vary significantly from CM to CM. As a rule of thumb, I’ve found 2 – 3% of hardware cost to be a reasonable estimate. As your own processes mature, this number should drop to ≤1%.
+
+#####Reliability / In-Field Failure Rates:
+
+No product will be without failures, regardless of how well-designed or test process. Strong reliability engineering practices during design phases and HASS during production can greatly decrease the probability of in-field failures, but never completely eliminate them. 
+
+As such it’s important to factor the probability of failure into the pricing model, but it can be difficult to do so as, again, there are a great number of variables affecting reliability. As a general rule of thumb a failure rate of 2 – 5% for electronics would be doing fairly well and therefore 2 – 5% of HW costs is a good range to allocate to your final unit pricing until you have empirical data to make a more informed decision.
+
+#####Packaging:
+
+Packaging costs also vary widely depending on the quality of packing you want to wrap your shiny product in. It’s all the rage these days to go for ultra high quality packing design and materials to create a luxurious ‘unboxing’ experience. It’s my personal opinion that as a start up, your money should be spent on:
+
+- Validating the living heck out of your market
+- Creating a product experience so sublime that melts your customers brains into goo
+- Finding the perfect manufacturing partner
+- Promoting your product until you’re blue in the face
+
+As you can tell from the above list, designing a 15 piece interlocking, shiny double bonded UV resistant cardboard portmanteau is not on the list. I’m not saying shouldn’t package your product beautifully (if you can do it for the right price), but I think you need to think very carefully about where your money goes. High end packaging can be anywhere from $5 – $20 per unit. Basic but respectable packing can start at $0.30 – 1.00 per unit.
+
+#####Shipping:
+
+Shipping costs are another fun variable, which change considerably based on where you are shipping from, your manufacturer’s MoQ and how Just-In-Time your sales model is. In most cases it’s not feasible to use air freight (unless your volumes are still relatively low), which means you’re stuck with a combination of sea and land transport. It’s an aspect that’s often overlooked with the Asian manufacturers, as they have large MoQs (up to 3,000 – 5,000), which need to be shipped to USA / Europe in most cases (not to mention port clearance fees), weeks if not months ahead of when you think you’ll actually need the stock. 
+
+###How to Price your HW Product - NRE Amortization
+
+NREs (Non-Recurring Engineering / Expense) usually come from four main places. These costs need to be recouped throughout production (preferably sooner rather than later), and so need to be split across the anticipated production volumes.
+
+#####Design & development costs: 
+
+Electronics, software, industrial design, mechanical tests, IP, prototypes, user research, the works. Everything it cost you (or will cost you) to get a fully manufacturable design, but isn’t part of the physical per-unit cost itself.
+
+#####Manufacturing set up: 
+
+Essentially the cost to get everything up and running for manufacturing, which is typically a flat fee from the manufacturer (depending on how well organized you are). It includes reviewing design files (if you have a good CM), setting up pick & place machines, getting stencils made and more. Typically put this value at $3,000 – $5,000 for a Western manufacturer, although it depends on the agreed upon conditions (e.g. it could be rolled it into the per-unit cost and tied to order volumes).
+
+#####Enclosure production cost:
+
+ If you are using 3D printing for small volume runs, then one-off costs are less of an issue. However if you are using injection moulding for instance, then the cost of having the mould created can be significant and needs to be taken into account. Depending on the actual mould complexity and where you get them made, these can range anywhere from $3,000 to $12,000 (or more).
+
+#####Test Fixtures: 
+
+You may need some sort of test fixture in order to carry out functional tests to ensure that the electronics (and mechanical bits) of your product are working before putting everything into a box to ship. These can range from simple manually operated fixtures which take a few hundred dollars (or less) to create, through to complex ATEs (Automated Test Equipment) which are essentially a full product in their own right. ATEs can range anywhere from $15,000 – $50,000 (yes, really), depending, yet again on product complexity.
+
+#####Certifications: 
+
+FCC, UL, CE, FDA, Ex, etc all add up and vary depending on your product as well as the category it falls under, whether it is designated as a medical device, has RF transmitting capabilities and more. Standard certifications are in the $10k – 20k range if you do them right the first time. If you use pre-approved parts (or go through some of the Asian labs), that cost can be as low as $1,000. 
+
+

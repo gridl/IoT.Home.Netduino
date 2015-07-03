@@ -53,3 +53,15 @@ In addition to obvious good signs like pre-selling before building, there are ot
 Delivering something to the user as soon as possible is a valuable move for startups. For hardware, this means not being afraid of presenting an “ugly” prototype. As long as it shows what it can do, it could be made out of cardboard with wires hanging off of it. Entrepreneurs tend to hesitate when it comes to sharing their product while its in development, or default to assuming that they need more polish for fear of causing a bad first impression. This is a critical error. Evolve your product in parallel with real customer feedback.
 
 ![Hardware Lifecycle](https://upverter.com/static/newsletter/lifecycle.jpg)
+
+###Landing Page + Mailing List
+
+A landing page, in some ways, is a variation on your minimum viable product (MVP). Instead of offering a physical V01 of your prototype that people can play around with in their hands, you’re essentially illustrating the idea of your product with copy and a domain name. A landing page can help you gauge the general interest of the market in your hardware device and serve as a litmus test on whether or not the problem you are solving is one that actually resonates with customers.
+
+Another incredibly huge gain from building a landing page is your mailing list. This is critical because when you eventually launch, you’re going to need to have a small subset of evangelists that can help you promote your message and product. The people on your mailing is your very first Kickstarter pledges, your first Tweeters, your first user group, and your first customers. You’ll be able to call on them when you need help with a final design decision, and gain insight from when you need to find that sweet spot with pricing.
+
+It’s not necessary to spend weeks on your landing page. Decide on a clickable, shareable domain name, put together something on a website builder like Squarespace, and jam in your Elevator Pitch. Do use high-quality images. Do not use Comic Sans. Build it and ship it. When you get into conversation with people, point them to it and start collecting those valuable email addresses!
+
+Hardware Product Canvas
+
+![Hardware Product Canvas](http://i.imgur.com/WEfsNcC.png)

@@ -99,3 +99,34 @@ Processing are the central components in most devices. They are the brain of you
 There are some components, like those that connect to mechanical elements, that don’t fit perfectly into the above 5 roles. Motors, relays and servos are good examples of this - they are similar to user interfaces, but they often manipulate the physical world because of a decision the processor has made. These kind of elements don’t have a great place in the canvas (yet!) so for now we recommend putting them in the User Interface or Storage sections.
 
 ![hardware_product_canvas-example](http://i.imgur.com/B22Qr2i.png)
+
+###what’s an ideal part?
+
+An ideal part can be loosely defined as one that:
+
+- Performs the required function at the required performance and quality
+- Has an interface that is compatible with the other relevant components in the design (ie: uses the same protocol, runs at the same frequency, same data width, etc.)
+- Has power requirements (ie: voltage and current) that can be met by the power system and are similar to the power requirements of other components in the design (ie: runs on the same voltage)
+- Has a small package and is conducive to a clean layout
+- Is in stock and widely available with acceptable lead times
+- Is low cost in accordance with your budget
+
+#####Cast a WIDE net and find all your vendors
+
+The first, most basic step would be to find all your vendors. For a given kind of part (ie: a BluetoothLE chip, LED driver, LiPo battery charger), find all the companies that play in that space.  A great way to do this is through a combination of Google and distributor websites (like [Digikey](http://www.digikey.com/ "Digikey"), [Avnet](http://www.avnet.com/ "Avnet"), [Arrow](http://www.arrow.com/ "Arrow"), [Newark](http://www.newark.com/ "Newark"), [Mouser](http://www.mouser.com/ "Mouser"), etc.).  Simply search for the kind of part you’re looking for and make a note of all the vendors that manufacture components in that area.
+
+#####Generate a list of part candidates
+
+Visit each vendor’s website and use their parametric search to find potential candidates. From the results, make a note of parts that look like they might work based on their titles, descriptions, and parameters. Prefer to use the vendor website rather than some other parts search engine because I can trust that their list of parts is up-to-date and comprehensive. Narrow down the list to limit the search to parts that are currently in stock on distributor websites. This works when building prototypes ASAP, and avoid waiting a few weeks for lead times in a phase that is acceptable spending more money on parts. 
+
+#####Trim to a shortlist 
+
+Quickly visit the product page of each part and skim through its feature list, while keeping the “ideal criteria” in mind to see if there are any glaring things that disqualify this part.  You’ll find them fast.  Most of the ideal criteria are typically listed in these product pages. This should distill your long list of parts to a qualified shortlist pretty quickly.
+
+#####Do a lot of reading  (it’ll pay off)
+
+At this point, you should have a small list of parts that look like good candidates.  The next step is to read the datasheet of each part to see if it meets your criteria.  Datasheets can be long and everyone hates reading them. It’s tempting to rush through this step but it’s one of the most important stages of the whole process.  Time and time again, I see people making design errors or spending hours on debugging, simply because they didn’t sit down and read the datasheet slowly.  
+
+#####Iterate: Rinse and repeat
+
+As you learn about available parts, you may discover new constraints.  For example, the candidate parts may only support an interface that your processor doesn’t.  In this case, you have to find a new processor or change your design.  Or you may find an ideal part but its required power rail voltage is different than all the other parts on your board.  Expect to iterate on your entire part search and change other parts of the design to accommodate them.

@@ -62,6 +62,40 @@ Another incredibly huge gain from building a landing page is your mailing list. 
 
 It’s not necessary to spend weeks on your landing page. Decide on a clickable, shareable domain name, put together something on a website builder like Squarespace, and jam in your Elevator Pitch. Do use high-quality images. Do not use Comic Sans. Build it and ship it. When you get into conversation with people, point them to it and start collecting those valuable email addresses!
 
-Hardware Product Canvas
+###Hardware Product Canvas
+
+All hardware is made up of parts, and those parts fit into a very small group of roles. There are sensors, communication, storage, user interfaces, and processing. We just need to make it easier for people to talk about what’s in their product. We just needed to break it up, and give people a way to write it down.
+
+This is the Hardware Product Canvas. It’s a tool designed to help you get through the earliest stages of a hardware design. It’s open-source, creative commons, and totally hackable. 
 
 ![Hardware Product Canvas](http://i.imgur.com/WEfsNcC.png)
+
+#####How To Use It?
+
+To use the canvas you just need to fill in the blanks. What kind of forces does your product need to sense? What kind of communication do you need? Do you need to store anything on the device? How much data do you need to process, and what kind of processor do you need? Do you need a user interface? LEDs or LCD or something else?
+
+#####Building Block: Sensors
+
+Sensors are components that measure forces in the physical world. They are good for measuring or detecting light (optical light sensor), or movement (accelerometer), or sound (microphone). Sensors are very popular recently in internet-of-things, and quantified-self devices for their ability to take previously offline data and bring it online. 
+
+#####Building Block: Communication
+
+Communication are components that send and receive signals between devices. They are good for getting data onto and off of your product.
+
+#####Building Block: Storage
+
+Storage are components that hold data. They are good for remembering the things your device senses or the things that are communicated to it. The most common storage these days is small flash memory ICs connected directly to the PCB in a device. 
+
+#####Building Block: User Interface & Experience
+
+User Interfaces are components that allow the user to enter information, or components that display information back to the user. They are great for turning things on and off (switch), changing settings (push button), displaying what mode a device is in (LCD), showing power status (LED), etc. 
+
+#####Building Block: Processing
+
+Processing are the central components in most devices. They are the brain of your product. They get data from sensors, send and receive through the communication components, write data to the storage components, receive user input and display back user information.
+
+#####Building Block: What About Everything Else?
+
+There are some components, like those that connect to mechanical elements, that don’t fit perfectly into the above 5 roles. Motors, relays and servos are good examples of this - they are similar to user interfaces, but they often manipulate the physical world because of a decision the processor has made. These kind of elements don’t have a great place in the canvas (yet!) so for now we recommend putting them in the User Interface or Storage sections.
+
+![hardware_product_canvas-example](http://i.imgur.com/B22Qr2i.png)

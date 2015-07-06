@@ -3,7 +3,7 @@ Home
 
 ##Home Intelligence
 
-Business Plan based on [How to Price Your HW Product](http://blog.upverter.com/post/121773420477 "How to Price Your HW Product ") by Alan Povall from Product Nimbus.
+Business Plan based on [How to Price Your HW Product](http://blog.upverter.com/post/121773420477 "How to Price Your HW Product ") by Alan Povall from [Product Nimbus](http://www.productnimbus.com/ "Product Nimbus").
 
 ###Define your startup in one sentence:
 

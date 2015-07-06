@@ -3,6 +3,8 @@ Home
 
 ##Home Intelligence
 
+Business Plan based on [How to Price Your HW Product](http://blog.upverter.com/post/121773420477 "How to Price Your HW Product ") by Alan Povall from Product Nimbus.
+
 ###Define your startup in one sentence:
 
 1. hardware basic product type
@@ -246,4 +248,38 @@ You may need some sort of test fixture in order to carry out functional tests to
 
 FCC, UL, CE, FDA, Ex, etc all add up and vary depending on your product as well as the category it falls under, whether it is designated as a medical device, has RF transmitting capabilities and more. Standard certifications are in the $10k – 20k range if you do them right the first time. If you use pre-approved parts (or go through some of the Asian labs), that cost can be as low as $1,000. 
 
+###Profit
 
+Profit is ultimately determined by:
+
+- How much your product costs to manufacture, minus margin / mark up.
+- How much competing, similar or alternative products are selling for.
+- How much your customers are willing to pay based on what they’ve told you (through discussions, pre-sales, faux-presales, cost-of-issue analysis, etc).  
+
+If you can’t answer the above two questions, drop everything and go find some customers to talk to. Yes, really. I’ll wait. It’s that important. 
+Consider also the sales model you’ll be using:
+
+- **Direct Sales**: you manufacture and sell directly to your customers. There are no real middle men. You are responsible for your sales channels / efforts, but can take much higher margins. Often a natural progression of this model is to sell directly to retailers, in order to reach a larger market.
+- **Indirect Sales**: you manufacture then ship product to distributors, who in turn ship to retailers (or depending on how niche your product is, you may ship straight to retailers). 
+
+If using indirect sales, both wholesalers & retailers add mark ups to your product (cutting into your profit margin), but take responsibility for promotion of your product and are often able to reach a wider audience. 
+
+- **Wholesalers** typically have profit margins in the range of 20 - 50%.
+- **Retailers** typically have profit margins in the range of 10 - 40%. These vary wildly depending on whether they are online retailers (e.g. Amazon), boutique physical stores or large brick-and-mortar stores (e.g. Walmart). Large retailers are a completely different ball game, so be careful.
+
+The ubiquitous language differs profit margin and markup:
+
+- **Profit margin** is how much of your selling price (revenue) is actually profit, after to your costs (CoGS, Cost of Goods Sold) have been taken into account.
+
+- **Mark up** is what percentage of your costs (CoGS) your profit is. 
+
+For example: if you sell your product directly to customers for $100, and costs $35 to manufacture and distribute, then:
+
+    	Profit Margin = (Revenue – CoGS) / Revenue
+    	Mark Up = (Revenue – CoGS) / CoGS
+
+	Example:
+		Revenue = $100
+		CoGS = $35
+    	Profit Margin = ($100 - $35) / $100 = 65%
+    	Markup = ($100 - $35) / $35 = 185%

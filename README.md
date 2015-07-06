@@ -273,13 +273,12 @@ The ubiquitous language differs profit margin and markup:
 
 - **Mark up** is what percentage of your costs (CoGS) your profit is. 
 
-For example: if you sell your product directly to customers for $100, and costs $35 to manufacture and distribute, then:
-
-    	Profit Margin = (Revenue – CoGS) / Revenue
-    	Mark Up = (Revenue – CoGS) / CoGS
-
-	Example:
-		Revenue = $100
-		CoGS = $35
-    	Profit Margin = ($100 - $35) / $100 = 65%
-    	Markup = ($100 - $35) / $35 = 185%
+Suppose that you sell your product directly to customers for $100, and costs $35 to manufacture and distribute, then:
+    
+    Profit Margin = (Revenue – CoGS) / Revenue
+    Mark Up = (Revenue – CoGS) / CoGS
+    
+    Revenue = $100
+    CoGS = $35
+    Profit Margin = ($100 - $35) / $100 = 65%
+    Markup = ($100 - $35) / $35 = 185%

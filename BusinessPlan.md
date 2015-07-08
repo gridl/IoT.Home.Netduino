@@ -102,9 +102,9 @@ There are some components, like those that connect to mechanical elements, that 
 
 ![hardware_product_canvas-example](http://i.imgur.com/B22Qr2i.png)
 
-###what’s an ideal part?
+###What’s an ideal part?
 
-An ideal part can be loosely defined as one that:
+An ideal part or component can be loosely defined as one that:
 
 - Performs the required function at the required performance and quality
 - Has an interface that is compatible with the other relevant components in the design (ie: uses the same protocol, runs at the same frequency, same data width, etc.)
@@ -125,7 +125,7 @@ Visit each vendor’s website and use their parametric search to find potential 
 
 Quickly visit the product page of each part and skim through its feature list, while keeping the “ideal criteria” in mind to see if there are any glaring things that disqualify this part.  You’ll find them fast.  Most of the ideal criteria are typically listed in these product pages. This should distill your long list of parts to a qualified shortlist pretty quickly.
 
-#####Do a lot of reading  (it’ll pay off)
+#####Do a lot of reading  (and it’ll pay off)
 
 At this point, you should have a small list of parts that look like good candidates.  The next step is to read the datasheet of each part to see if it meets your criteria.  Datasheets can be long and everyone hates reading them. It’s tempting to rush through this step but it’s one of the most important stages of the whole process.  Time and time again, I see people making design errors or spending hours on debugging, simply because they didn’t sit down and read the datasheet slowly.  
 
@@ -145,7 +145,7 @@ If you are working with technology that’s new to you, sometimes you don’t ev
 
 When reaching out for help it’s important that you look like a legitimate company.  This is because **all these people are helping you in the hopes that you buy a chip that they sell**.  But they don’t want to waste time if they think you’re a hobbyist working from your garage.  Make sure you have a professional company website or landing page and send emails from your company domain.
 
-###How to Price your HW - Product related
+###How to Price your HW - Product costs
 
 If you’re building a HW product, you’ve inevitably wondered:
 
@@ -224,7 +224,7 @@ As you can tell from the above list, designing a 15 piece interlocking, shiny do
 
 Shipping costs are another fun variable, which change considerably based on where you are shipping from, your manufacturer’s MoQ and how Just-In-Time your sales model is. In most cases it’s not feasible to use air freight (unless your volumes are still relatively low), which means you’re stuck with a combination of sea and land transport. It’s an aspect that’s often overlooked with the Asian manufacturers, as they have large MoQs (up to 3,000 – 5,000), which need to be shipped to USA / Europe in most cases (not to mention port clearance fees), weeks if not months ahead of when you think you’ll actually need the stock. 
 
-###How to Price your HW - Amortization
+###How to Price your HW - Investments amortization
 
 NREs (Non-Recurring Engineering / Expense) usually come from four main places. These costs need to be recouped throughout production (preferably sooner rather than later), and so need to be split across the anticipated production volumes.
 

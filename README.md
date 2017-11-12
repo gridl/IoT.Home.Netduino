@@ -5,12 +5,12 @@ Home.Netduino
 
 The idea is to build a starter kit for a IoT project based on Netduino.
 
-Gathering several projects along some time, I´ll try to list the authors below. A couple versions are provided:
+Several projects were gathered at Internet, a couple versions are provided:
 
 - Home was the initial project
-- Home2 is the latest release.
+- Home2 is the latest release
 
-Following projects are provided:
+Following projects are provided at both versions:
 
 - Web Server
 - File Client
@@ -18,6 +18,6 @@ Following projects are provided:
 - Temperature & Humidity
 - Infrared
 
-Netduino was a nice platform some years ago providing components for several customized projects. Currently, new investors promises improvements in this interesting platform.
+Netduino is a nice platform, providing components for several customized projects. New investors promises improvements for this interesting platform.
 
 Have fun!

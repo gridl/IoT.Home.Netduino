@@ -18,6 +18,6 @@ Following projects are provided at both versions:
 - Temperature & Humidity
 - Infrared
 
-Netduino is a nice platform, providing components for several customized projects. New investors promises improvements for this interesting platform.
+Netduino provides components for customized projects, based on the Cortex-M Micro Processor running the .NET Micro Framework (NETMF) v4.3. Development can be done on both Windows, with Visual Studio, or with Xamarin Studio on Mac OS X. New investors arrived and improvements are expected for this interesting platform.
 
 Have fun!
